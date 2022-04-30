@@ -143,6 +143,8 @@
     <ClInclude Include="BadQueue.h" />
     <ClInclude Include="IQueue.h" />
     <ClInclude Include="ListQueue.h" />
+    <ClInclude Include="PeekBack.h" />
+    <ClInclude Include="PeekBackArrayQueue.h" />
     <ClInclude Include="UnboundedQueue.h" />
   </ItemGroup>
   <ItemGroup>

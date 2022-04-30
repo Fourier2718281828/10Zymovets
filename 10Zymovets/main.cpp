@@ -1,15 +1,30 @@
 #include "ArrayQueue.h"
 #include "ListQueue.h"
 #include "UnboundedQueue.h"
+#include "PeekBackArrayQueue.h"
 #include <iostream>
 using std::cout;
 using std::endl;
+
+//***********************************************************
+//	Визначити клас абстрактних черг за наведеним нижче 
+//	зразком. Побудувати реалізації абстрактного класу
+//	а) на базі масиву (обмежена черга)
+//	б) на базі списку
+//	в) на базі масиву (необмежена черга) *** (бонусна опція)
+//	Як в черзі улаштувати підглядання?
+//	Developed by Ruslan Zymovets (SE, group 1) on April 30
+//	Version 1.0
+//***********************************************************
 
 //Can we add virtual method print to IQueue?
 //Is override forbidden?
 //Why not implement class BadQueue as member of abstract class? (common)
 //Warning: buffer overrun while writing to _allocator
-
+//NVI? How often? And in what situations? PeekBack?
+//Should the default ctor be "Called" in the initialization list of derived class's ctor?
+//What if T is reference or const?
+//peekback can be operator[]?
 
 int main(void)
 {
@@ -83,15 +98,15 @@ int main(void)
 	iq->put(30);
 	delete iq;*/
 
-	UnboundedQueue<int> qq;
-	try
+	PeekBackArrayQueue<5, int> pbaq;
+	for (int i = 0; i < 4; ++i)
 	{
-		qq.pop();
+		pbaq.put(i);
 	}
-	catch (const UnboundedQueue<int>::BadQueue& bq)
-	{
-		bq.print_diagnosis(cout);
-	}
-
+	cout << pbaq << endl;
+	pbaq.pop();
+	cout << pbaq << endl;
+	pbaq.put(10);
+	cout << pbaq << endl;
 	return 0;
 }

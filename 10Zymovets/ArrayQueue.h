@@ -2,6 +2,17 @@
 #define _ARRAY_QUEUE_
 #include "IQueue.h"
 
+//***********************************************************
+//	Визначити клас абстрактних черг за наведеним нижче 
+//	зразком. Побудувати реалізації абстрактного класу
+//	а) на базі масиву (обмежена черга)
+//	б) на базі списку
+//	в) на базі масиву (необмежена черга) *** (бонусна опція)
+//	Як в черзі улаштувати підглядання?
+//	Developed by Ruslan Zymovets (SE, group 1) on April 30
+//	Version 1.0
+//***********************************************************
+
 template<size_t Capacity, typename T>
 class ArrayQueue : public IQueue<T>
 {
@@ -59,7 +70,7 @@ inline ostream& ArrayQueue<Capacity, T>::do_print(ostream& o) const
 	{
 		o << _allocator[i] << ((i == _back) ? "" : ", ");
 	}
-	return o << ']' << ':' << IQueue<T>::size();
+	return o << ']' << ':' << '(' << IQueue<T>::size() << '/' << IQueue<T>::capacity() << ')';
 }
 
 template<size_t Capacity, typename T>
@@ -78,7 +89,7 @@ template<size_t Capacity, typename T>
 inline const T& ArrayQueue<Capacity, T>::do_front() const
 {
 	if (IQueue<T>::empty()) 
-		throw IQueue<T>::BadQueue(QueueProblem.EMPTY_QUEUE_FRONT);
+		throw IQueue<T>::BadQueue(QueueProblem::EMPTY_QUEUE_FRONT);
 	return _allocator[_front];
 }
 
@@ -98,7 +109,7 @@ template<size_t Capacity, typename T>
 inline void ArrayQueue<Capacity, T>::do_pop()
 {
 	if (IQueue<T>::empty()) 
-		throw IQueue<T>::BadQueue(QueueProblem.EMPTY_QUEUE_POP);
+		throw IQueue<T>::BadQueue(QueueProblem::EMPTY_QUEUE_POP);
 	--_size;
 	_front = next_index(_front);
 }
@@ -107,7 +118,7 @@ template<size_t Capacity, typename T>
 inline void ArrayQueue<Capacity, T>::do_put(const T& value)
 {
 	if (IQueue<T>::full()) 
-		throw IQueue<T>::BadQueue(QueueProblem.FULL_QUEUE_PUT);
+		throw IQueue<T>::BadQueue(QueueProblem::FULL_QUEUE_PUT);
 	++_size;
 	_allocator[_back = next_index(_back)] = value;
 }

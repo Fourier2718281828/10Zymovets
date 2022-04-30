@@ -2,6 +2,7 @@
 #define _IQUEUE_
 #include <ostream>
 using std::ostream;
+
 //***********************************************************
 //	Визначити клас абстрактних черг за наведеним нижче 
 //	зразком. Побудувати реалізації абстрактного класу
@@ -9,10 +10,10 @@ using std::ostream;
 //	б) на базі списку
 //	в) на базі масиву (необмежена черга) *** (бонусна опція)
 //	Як в черзі улаштувати підглядання?
-//	Developed by Ruslan Zymovets (SE, group 1)
-//	on March 15
+//	Developed by Ruslan Zymovets (SE, group 1) on April 30
 //	Version 1.0
 //***********************************************************
+
 template <typename T>
 class IQueue
 {
@@ -46,6 +47,7 @@ protected:
 		EMPTY_QUEUE_FRONT,
 		EMPTY_QUEUE_POP,
 		FULL_QUEUE_PUT,
+		PEEKBACK_INDEX_OUT_OF_BOUNDS,
 	};
 };
 
