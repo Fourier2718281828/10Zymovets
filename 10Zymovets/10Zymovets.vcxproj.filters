@@ -13,28 +13,40 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Iterators">
+      <UniqueIdentifier>{93e712f5-938b-4dc5-95ba-73c6e0222f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Containers">
+      <UniqueIdentifier>{c042d77d-63fa-4fb0-b768-b0b8d7533acd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interfaces">
+      <UniqueIdentifier>{c58c7bcd-6a8b-437c-8288-c756424d0c11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ArrayQueue.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="ListQueue.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="UnboundedQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BadQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PeekBack.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="PeekBackArrayQueue.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="IQueue.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="PeekBack.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractIterator.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayQueueIterator.h">
+      <Filter>Header Files\Iterators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -39,7 +39,6 @@ private:
 	using IQueue<T>::QueueProblem;
 };
 
-
 template<typename T>
 inline ListQueue<T>::ListQueue()
 	: _front(nullptr), _back(nullptr), _size(0)
@@ -118,11 +117,13 @@ inline size_t ListQueue<T>::do_capacity() const
 {
 	return -1;
 }
+
 template<typename T>
 inline size_t ListQueue<T>::do_size() const
 {
 	return _size;
 }
+
 template<typename T>
 inline void ListQueue<T>::do_pop()
 {
@@ -135,6 +136,7 @@ inline void ListQueue<T>::do_pop()
 	
 	return;
 }
+
 template<typename T>
 inline void ListQueue<T>::do_put(const T& value)
 {

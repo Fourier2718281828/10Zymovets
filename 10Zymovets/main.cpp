@@ -17,17 +17,20 @@ using std::endl;
 //	Version 1.0
 //***********************************************************
 
-//Can we add virtual method print to IQueue?
-//Is override forbidden?
-//Why not implement class BadQueue as member of abstract class? (common)
-//Warning: buffer overrun while writing to _allocator
-//NVI? How often? And in what situations? PeekBack?
-//Should the default ctor be "Called" in the initialization list of derived class's ctor?
-//What if T is reference or const?
-//peekback can be operator[]?
-
 int main(void)
 {
+
+	ArrayQueue<2, int> aq;
+	auto itor = ArrayQueue<2, int>::Iterator(aq);
+	try
+	{
+		aq.front();
+	}
+	catch(const ArrayQueue<2,int>::BadQueue& b)
+	{
+		b.print_diagnosis(cout);
+	}
+
 	/*UnboundedQueue<int> uq;
 	for (int i = 0; i < 20; ++i)
 	{
@@ -98,15 +101,15 @@ int main(void)
 	iq->put(30);
 	delete iq;*/
 
-	PeekBackArrayQueue<5, int> pbaq;
+	/*PeekBackArrayQueue<5, int> pbaq;
 	for (int i = 0; i < 4; ++i)
 	{
 		pbaq.put(i);
 	}
-	cout << pbaq << endl;
+	cout << pbaq[0] << endl;
 	pbaq.pop();
-	cout << pbaq << endl;
+	cout << pbaq[0] << endl;
 	pbaq.put(10);
-	cout << pbaq << endl;
+	cout << pbaq[3] << endl;*/
 	return 0;
 }

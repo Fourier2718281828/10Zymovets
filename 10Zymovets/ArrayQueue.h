@@ -26,6 +26,7 @@ public:
 	~ArrayQueue();
 	ArrayQueue(const ArrayQueue&)				= delete;
 	ArrayQueue& operator=(const ArrayQueue&)	= delete;
+	class Iterator;
 private:
 			inline size_t	next_index(size_t)	const;
 	virtual inline ostream& do_print(ostream&)	const	override;
@@ -122,4 +123,5 @@ inline void ArrayQueue<Capacity, T>::do_put(const T& value)
 	++_size;
 	_allocator[_back = next_index(_back)] = value;
 }
+#include "ArrayQueueIterator.h"
 #endif // !_ARRAY_QUEUE_

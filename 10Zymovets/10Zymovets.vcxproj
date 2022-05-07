@@ -140,8 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArrayQueue.h" />
-    <ClInclude Include="BadQueue.h" />
+    <ClInclude Include="ArrayQueueIterator.h" />
     <ClInclude Include="IQueue.h" />
+    <ClInclude Include="AbstractIterator.h" />
     <ClInclude Include="ListQueue.h" />
     <ClInclude Include="PeekBack.h" />
     <ClInclude Include="PeekBackArrayQueue.h" />
