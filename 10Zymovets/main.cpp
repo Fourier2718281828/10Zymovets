@@ -46,7 +46,7 @@ int main(void)
 	a.put(2);
 	a.put(3);
 
-
+	ListQueue<int>::Iterator itor = a.attach();
 	/*auto itor = a.attach();
 	cout << *itor << endl;
 	itor += 2;

@@ -17,7 +17,13 @@ template<typename T>
 class ListQueue : public IQueue<T>
 {
 private:
-	class Iterator;
+	//private inner types:
+	class _Iterator;
+	using IQueue<T>::QueueProblem;
+public:
+	//inner types for users:
+	using Iterator = _Iterator;
+private:
 	struct Node;
 	Node*	_front;
 	Node*	_back;
@@ -27,7 +33,7 @@ public:
 	~ListQueue();
 	ListQueue(const ListQueue&)				= delete;
 	ListQueue& operator=(const ListQueue&)	= delete;
-	Iterator attach() const { return Iterator(_front); }
+	Iterator attach() const { return _Iterator(_front); }
 private:
 	virtual inline ostream& do_print(ostream&)	const	override;
 	virtual inline bool		do_empty()			const	override;
@@ -37,8 +43,6 @@ private:
 	virtual inline size_t	do_size()			const	override;
 	virtual inline void		do_pop()					override;
 	virtual inline void		do_put(const T& value)		override;
-private:
-	using IQueue<T>::QueueProblem;
 };
 
 

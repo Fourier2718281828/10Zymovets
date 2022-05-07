@@ -5,92 +5,88 @@
 #include "ListQueueIterator.h"
 
 template<size_t Capacity, typename T>
-class ArrayQueue<Capacity, T>::Iterator : public AbstractIterator<T>
+class ArrayQueue<Capacity, T>::_Iterator : public AbstractIterator<T>
 {
 private:
-	//typename ArrayQueue<Capacity, T>&	_container;
-	T *const							_start;
-	mutable T*							_current;
-	mutable T*							_end;
+	T *const	_start;
+	T *const	_end;
+	mutable T*	_current;
 public:
-	Iterator(T*, T*);
-	Iterator(const Iterator&);
-	virtual ~Iterator()	= default;
-	virtual Iterator& clone()									override;
-	virtual void start()										override;
-	virtual bool stop()									const	override;
-	virtual const Iterator& operator++()				const	override;
-	virtual const Iterator& operator+=(const size_t)	const 	override;
-	virtual const T& operator*()						const	override;
-	virtual T& operator*()										override;
+	_Iterator(T*, T*);
+	_Iterator(const _Iterator&);
+	virtual ~_Iterator()	= default;
+	virtual _Iterator& do_clone()									override;
+	virtual void do_start()											override;
+	virtual bool do_stop()									const	override;
+	virtual const _Iterator& do_preincrement()				const	override;
+	virtual const _Iterator& do_assign_plus(const size_t)	const 	override;//TODO iterator problems
+	virtual const T& do_operator_star()						const	override;
+	virtual T& do_operator_star()									override;
 };
 
 template<size_t Capacity, typename T>
-inline ArrayQueue<Capacity, T>::Iterator::Iterator(T* start, T* end)
-	:	
-		//_container	(aq), 
-		_start		(start),
-		_current	(start),
-		_end		(end)
+inline ArrayQueue<Capacity, T>::_Iterator::_Iterator(T* start, T* end)
+	:	_start		(start),
+		_end		(end),
+		_current	(start)
 {
 	return;
 }
 
 template<size_t Capacity, typename T>
-inline ArrayQueue<Capacity, T>::Iterator::Iterator(const ArrayQueue<Capacity, T>::Iterator& itor)
-	:	//_container	(itor._container),
-		_start		(itor._start),
-		_current	(itor._current),
-		_end		(itor._end)
+inline ArrayQueue<Capacity, T>::_Iterator::_Iterator(const ArrayQueue<Capacity, T>::_Iterator& itor)
+	:	_start		(itor._start),
+		_end		(itor._end),
+		_current(itor._current)
 {
 	return;
 }
 
 template<size_t Capacity, typename T> inline 
-typename ArrayQueue<Capacity, T>::Iterator& ArrayQueue<Capacity, T>::Iterator::clone()
+typename ArrayQueue<Capacity, T>::_Iterator& ArrayQueue<Capacity, T>::_Iterator::do_clone()
 {
 	return *(new Iterator(*this));
 }
 
 template<size_t Capacity, typename T>
-inline void ArrayQueue<Capacity, T>::Iterator::start()
+inline void ArrayQueue<Capacity, T>::_Iterator::do_start()
 {
-	_current	= _start;
-	_end		= _start /*+ _container.size()*/;
-
+	_current = _start;
 	return;
 }
 
 template<size_t Capacity, typename T>
-inline bool ArrayQueue<Capacity, T>::Iterator::stop() const
+inline bool ArrayQueue<Capacity, T>::_Iterator::do_stop() const
 {
 	return _current == _end;
 }
 
 template<size_t Capacity, typename T>
-inline const typename ArrayQueue<Capacity, T>::Iterator& 
-ArrayQueue<Capacity, T>::Iterator::operator++() const
+inline const typename ArrayQueue<Capacity, T>::_Iterator&
+ArrayQueue<Capacity, T>::_Iterator::do_preincrement() const
 {
 	++_current;
 	return *this;
 }
 
 template<size_t Capacity, typename T>
-inline const typename ArrayQueue<Capacity, T>::Iterator&
-ArrayQueue<Capacity, T>::Iterator::operator+=(const size_t i) const
+inline const typename ArrayQueue<Capacity, T>::_Iterator&
+ArrayQueue<Capacity, T>::_Iterator::do_assign_plus(const size_t i) const
 {
-	_current = (_current + i >= _end) ? _end : _current + i;
+	if (_current + i > _end)
+		throw 1;//TODO iterator problems
+	_current += i;
 	return *this;
 }
 
 template<size_t Capacity, typename T>
-inline const T& ArrayQueue<Capacity, T>::Iterator::operator*() const
+inline const T& ArrayQueue<Capacity, T>::_Iterator::do_operator_star() const
 {
 	return *_current;
 }
 
 template<size_t Capacity, typename T>
-inline T& ArrayQueue<Capacity, T>::Iterator::operator*()
+inline T& ArrayQueue<Capacity, T>::_Iterator::do_operator_star()
 {
 	return *_current;
 }
