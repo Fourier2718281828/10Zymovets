@@ -22,20 +22,14 @@
     <Filter Include="Header Files\Interfaces">
       <UniqueIdentifier>{c58c7bcd-6a8b-437c-8288-c756424d0c11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Containers\PeekBack Containers">
+      <UniqueIdentifier>{a9cec426-7ced-43b1-abbd-d95b52029abe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Containers\No PeekBack Containers">
+      <UniqueIdentifier>{ca767f7e-d8fd-49fb-b77f-8b3f4561377b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayQueue.h">
-      <Filter>Header Files\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="ListQueue.h">
-      <Filter>Header Files\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="UnboundedQueue.h">
-      <Filter>Header Files\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="PeekBackArrayQueue.h">
-      <Filter>Header Files\Containers</Filter>
-    </ClInclude>
     <ClInclude Include="IQueue.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
@@ -47,6 +41,18 @@
     </ClInclude>
     <ClInclude Include="ArrayQueueIterator.h">
       <Filter>Header Files\Iterators</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayQueue.h">
+      <Filter>Header Files\Containers\No PeekBack Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="ListQueue.h">
+      <Filter>Header Files\Containers\No PeekBack Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="UnboundedQueue.h">
+      <Filter>Header Files\Containers\No PeekBack Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="PeekBackArrayQueue.h">
+      <Filter>Header Files\Containers\PeekBack Containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

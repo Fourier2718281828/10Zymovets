@@ -22,11 +22,12 @@ private:
 	size_t _back;
 	T _allocator[Capacity];
 public:
+	class Iterator;
 	ArrayQueue();
 	~ArrayQueue();
 	ArrayQueue(const ArrayQueue&)				= delete;
 	ArrayQueue& operator=(const ArrayQueue&)	= delete;
-	class Iterator;
+	Iterator attach(); 
 private:
 			inline size_t	next_index(size_t)	const;
 	virtual inline ostream& do_print(ostream&)	const	override;
@@ -41,20 +42,28 @@ private:
 	using IQueue<T>::QueueProblem;
 };
 
+#include "ArrayQueueIterator.h"
+
 template<typename T>
 class ArrayQueue<0, T>;
 
-template<size_t Size, typename T>
-inline ArrayQueue<Size, T>::ArrayQueue()
+template<size_t Capacity, typename T>
+inline ArrayQueue<Capacity, T>::ArrayQueue()
 	: _size(0), _front(0), _back(-1)
 {
 	return;
 };
 
-template<size_t Size, typename T>
-inline ArrayQueue<Size, T>::~ArrayQueue()
+template<size_t Capacity, typename T>
+inline ArrayQueue<Capacity, T>::~ArrayQueue()
 {
 	return;
+}
+
+template<size_t Capacity, typename T>
+inline typename ArrayQueue<Capacity, T>::Iterator ArrayQueue<Capacity, T>::attach()
+{
+	return Iterator(*this);
 }
 
 template<size_t Capacity, typename T>
@@ -123,5 +132,4 @@ inline void ArrayQueue<Capacity, T>::do_put(const T& value)
 	++_size;
 	_allocator[_back = next_index(_back)] = value;
 }
-#include "ArrayQueueIterator.h"
 #endif // !_ARRAY_QUEUE_

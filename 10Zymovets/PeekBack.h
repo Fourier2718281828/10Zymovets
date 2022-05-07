@@ -16,8 +16,8 @@ template<typename T>
 class PeekBack
 {
 public:
-	PeekBack()					= default;
-	virtual ~PeekBack()	= default;
+	PeekBack()							= default;
+	virtual ~PeekBack()					= default;
 	inline const T& operator[](const size_t) const;
 private:
 	virtual inline const T& do_peekback(const size_t) const = 0;

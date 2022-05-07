@@ -19,7 +19,7 @@ class IQueue
 {
 public:
 	IQueue()								= default;
-	virtual ~IQueue()						= default; //QUESTION
+	virtual ~IQueue()						= default;
 	IQueue(const IQueue&)					= delete;
 	IQueue& operator=(const IQueue&)		= delete;
 	inline ostream& print(ostream&) const;

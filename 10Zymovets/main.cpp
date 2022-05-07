@@ -3,6 +3,7 @@
 #include "UnboundedQueue.h"
 #include "PeekBackArrayQueue.h"
 #include <iostream>
+#include <vector>
 using std::cout;
 using std::endl;
 
@@ -17,11 +18,24 @@ using std::endl;
 //	Version 1.0
 //***********************************************************
 
+
+//Const iterators?
+
 int main(void)
 {
 
+	
+
+
+	PeekBackArrayQueue<2, int> pbaq;
+	PeekBackArrayQueue<2, int> pbaq2;
+	//pbaq = pbaq2;
+	pbaq.put(2);
+	cout << pbaq << endl;
 	ArrayQueue<2, int> aq;
 	auto itor = ArrayQueue<2, int>::Iterator(aq);
+	auto itor2 = PeekBackArrayQueue<2, int>::Iterator(pbaq);
+	//itor = itor2;
 	try
 	{
 		aq.front();

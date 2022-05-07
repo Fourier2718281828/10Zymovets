@@ -1,7 +1,7 @@
 #ifndef _PEEKBACK_ARRAY_QUEUE_
 #define _PEEKBACK_ARRAY_QUEUE_
 #include "PeekBack.h"
-#include "IQueue.h"
+#include "ArrayQueue.h"
 
 //***********************************************************
 //	Визначити клас абстрактних черг за наведеним нижче 
@@ -14,10 +14,21 @@
 //	Version 1.0
 //***********************************************************
 
-template<typename T>
-class PeekBackArrayStack
+template<size_t Capacity, typename T>
+class PeekBackArrayQueue : public ArrayQueue<Capacity, T>, public PeekBack<T>
 {
-
+public:
+	PeekBackArrayQueue()										= default;
+	virtual ~PeekBackArrayQueue()								= default;
+	PeekBackArrayQueue(const PeekBackArrayQueue&)				= delete;
+	PeekBackArrayQueue& operator=(const PeekBackArrayQueue&)	= delete;
+private:
+	virtual inline const T& do_peekback(const size_t) const override;
 };
 
+template<size_t Capacity, typename T>
+inline const T& PeekBackArrayQueue<Capacity, T>::do_peekback(const size_t i) const
+{
+	return *(ArrayQueue<Capacity, T>::attach() += i);
+}
 #endif // !_PEEKBACK_ARRAY_QUEUE_
