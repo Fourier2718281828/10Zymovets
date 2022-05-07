@@ -66,6 +66,12 @@ inline ArrayQueue<Capacity, T>::~ArrayQueue()
 }
 
 template<size_t Capacity, typename T>
+inline typename ArrayQueue<Capacity, T>::Iterator ArrayQueue<Capacity, T>::attach()
+{
+	return _Iterator(&_allocator[0], &_allocator[0]);
+}
+
+template<size_t Capacity, typename T>
 inline size_t ArrayQueue<Capacity, T>::next_index(size_t i) const
 {
 	return (i + 1) % IQueue<T>::capacity();

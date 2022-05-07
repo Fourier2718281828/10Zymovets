@@ -25,6 +25,14 @@ using std::endl;
 
 int main(void)
 {
+	ArrayQueue<5, int> aq;
+	ArrayQueue<5, int>::Iterator itaq = aq.attach();
+	aq.put(1);
+	aq.put(2);
+	aq.put(3);
+	cout << *(++itaq) << endl;
+
+
 	PeekBackListQueue<int> pb;
 	pb.put(1);
 	pb.put(2);

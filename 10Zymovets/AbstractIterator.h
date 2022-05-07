@@ -6,21 +6,21 @@ class AbstractIterator
 public:
 	AbstractIterator()			= default;
 	virtual ~AbstractIterator() = default;
-	AbstractIterator& clone();
-	void start();
-	bool stop()											const;
-	const AbstractIterator& operator++()				const;
-	const AbstractIterator& operator+=(const size_t)	const;
-	const T& operator*()								const;
-	T& operator*();
+	inline AbstractIterator& clone();
+	inline void start();
+	inline bool stop()										const;
+	inline const AbstractIterator& operator++()				const;
+	inline const AbstractIterator& operator+=(const size_t)	const;
+	inline const T& operator*()								const;
+	inline T& operator*();
 private:
-	virtual AbstractIterator& do_clone()									= 0;
-	virtual void do_start()													= 0;
-	virtual bool do_stop()											const	= 0;
-	virtual const AbstractIterator& do_preincrement()				const	= 0;
-	virtual const AbstractIterator& do_assign_plus(const size_t)	const	= 0;
-	virtual const T& do_operator_star()								const	= 0;
-	virtual T& do_operator_star()											= 0;
+	virtual inline AbstractIterator& do_clone()										= 0;
+	virtual inline void do_start()													= 0;
+	virtual inline bool do_stop()											const	= 0;
+	virtual inline const AbstractIterator& do_preincrement()				const	= 0;
+	virtual inline const AbstractIterator& do_assign_plus(const size_t)		const	= 0;
+	virtual inline const T& do_operator_star()								const	= 0;
+	virtual inline T& do_operator_star()											= 0;
 };
 
 template<class T>

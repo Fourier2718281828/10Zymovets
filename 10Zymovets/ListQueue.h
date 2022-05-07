@@ -33,7 +33,7 @@ public:
 	~ListQueue();
 	ListQueue(const ListQueue&)				= delete;
 	ListQueue& operator=(const ListQueue&)	= delete;
-	Iterator attach() const { return _Iterator(_front); }
+	inline Iterator attach() const { return Iterator(_front); }
 private:
 	virtual inline ostream& do_print(ostream&)	const	override;
 	virtual inline bool		do_empty()			const	override;
@@ -45,6 +45,7 @@ private:
 	virtual inline void		do_put(const T& value)		override;
 };
 
+#include "ListQueueIterator.h"
 
 template<typename T>
 inline ListQueue<T>::ListQueue()
@@ -86,7 +87,7 @@ struct ListQueue<T>::Node
 //template<typename T>
 //inline typename ListQueue<T>::Iterator ListQueue<T>::attach() const
 //{
-//	return ListQueue<T>::Iterator(_front);
+//	return _Iterator(_front);
 //}
 
 template<typename T>
@@ -165,6 +166,4 @@ inline void ListQueue<T>::do_put(const T& value)
 
 	return;
 }
-
-#include "ListQueueIterator.h"
 #endif // !_LIST_QUEUE_
