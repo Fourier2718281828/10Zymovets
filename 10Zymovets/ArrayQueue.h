@@ -17,12 +17,12 @@ template<size_t Capacity, typename T>
 class ArrayQueue : public IQueue<T>
 {
 private:
+	class Iterator;
 	size_t _size;
 	size_t _front;
 	size_t _back;
 	T _allocator[Capacity];
 public:
-	class Iterator;
 	ArrayQueue();
 	~ArrayQueue();
 	ArrayQueue(const ArrayQueue&)				= delete;
@@ -40,6 +40,8 @@ private:
 	virtual inline void		do_put(const T& value)		override;
 private:
 	using IQueue<T>::QueueProblem;
+public:
+	using iterator = Iterator;
 };
 
 #include "ArrayQueueIterator.h"
@@ -63,7 +65,7 @@ inline ArrayQueue<Capacity, T>::~ArrayQueue()
 template<size_t Capacity, typename T>
 inline typename ArrayQueue<Capacity, T>::Iterator ArrayQueue<Capacity, T>::attach()
 {
-	return Iterator(*this);
+	return Iterator(&_allocator[0]);
 }
 
 template<size_t Capacity, typename T>

@@ -2,6 +2,7 @@
 #include "ListQueue.h"
 #include "UnboundedQueue.h"
 #include "PeekBackArrayQueue.h"
+#include "PeekBackListQueue.h"
 #include <iostream>
 #include <vector>
 using std::cout;
@@ -20,30 +21,57 @@ using std::endl;
 
 
 //Const iterators?
+//Make iterator exceptions
 
 int main(void)
 {
+	PeekBackListQueue<int> pb;
+	pb.put(1);
+	pb.put(2);
+	pb.put(3);
+	cout << &pb.front() << endl;
+	cout << pb.peekback(1) << endl;
+	pb.pop();
+	pb.pop();
+	pb.pop();
 
-	
+	pb.put(4);
+	pb.put(5);
+	pb.put(6);
+	cout << &pb.front() << endl;
+	cout << pb.peekback(1) << endl;
+
+	ListQueue<int> a;
+	a.put(1);
+	a.put(2);
+	a.put(3);
 
 
-	PeekBackArrayQueue<2, int> pbaq;
-	PeekBackArrayQueue<2, int> pbaq2;
-	//pbaq = pbaq2;
-	pbaq.put(2);
-	cout << pbaq << endl;
-	ArrayQueue<2, int> aq;
-	auto itor = ArrayQueue<2, int>::Iterator(aq);
-	auto itor2 = PeekBackArrayQueue<2, int>::Iterator(pbaq);
-	//itor = itor2;
-	try
+	/*auto itor = a.attach();
+	cout << *itor << endl;
+	itor += 2;
+	cout << *itor << endl;*/
+	/*while (!itor.stop())
 	{
-		aq.front();
-	}
-	catch(const ArrayQueue<2,int>::BadQueue& b)
-	{
-		b.print_diagnosis(cout);
-	}
+		cout << *itor << ',';
+		++itor;
+	}*/
+	//PeekBackArrayQueue<2, int> pbaq;
+	//PeekBackArrayQueue<2, int> pbaq2;
+	////pbaq = pbaq2;
+	//pbaq.put(2);
+	//cout << pbaq << endl;
+	//ArrayQueue<2, int> aq;
+	////auto itor = ArrayQueue<2, int>::iterator;
+	////itor = itor2;
+	//try
+	//{
+	//	aq.front();
+	//}
+	//catch(const ArrayQueue<2,int>::BadQueue& b)
+	//{
+	//	b.print_diagnosis(cout);
+	//}
 
 	/*UnboundedQueue<int> uq;
 	for (int i = 0; i < 20; ++i)

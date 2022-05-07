@@ -54,6 +54,12 @@
     <ClInclude Include="PeekBackArrayQueue.h">
       <Filter>Header Files\Containers\PeekBack Containers</Filter>
     </ClInclude>
+    <ClInclude Include="ListQueueIterator.h">
+      <Filter>Header Files\Iterators</Filter>
+    </ClInclude>
+    <ClInclude Include="PeekBackListQueue.h">
+      <Filter>Header Files\Containers\PeekBack Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

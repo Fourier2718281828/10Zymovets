@@ -144,8 +144,10 @@
     <ClInclude Include="IQueue.h" />
     <ClInclude Include="AbstractIterator.h" />
     <ClInclude Include="ListQueue.h" />
+    <ClInclude Include="ListQueueIterator.h" />
     <ClInclude Include="PeekBack.h" />
     <ClInclude Include="PeekBackArrayQueue.h" />
+    <ClInclude Include="PeekBackListQueue.h" />
     <ClInclude Include="UnboundedQueue.h" />
   </ItemGroup>
   <ItemGroup>

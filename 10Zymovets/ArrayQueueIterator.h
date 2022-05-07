@@ -2,17 +2,18 @@
 #define _ARRAY_QUEUE_ITERATOR_
 #include "ArrayQueue.h"
 #include "AbstractIterator.h"
+#include "ListQueueIterator.h"
 
 template<size_t Capacity, typename T>
 class ArrayQueue<Capacity, T>::Iterator : public AbstractIterator<T>
 {
 private:
-	typename ArrayQueue<Capacity, T>&	_container;
+	//typename ArrayQueue<Capacity, T>&	_container;
 	T *const							_start;
 	mutable T*							_current;
 	mutable T*							_end;
 public:
-	Iterator(typename ArrayQueue<Capacity, T>&);
+	Iterator(T*, T*);
 	Iterator(const Iterator&);
 	virtual ~Iterator()	= default;
 	virtual Iterator& clone()									override;
@@ -25,19 +26,19 @@ public:
 };
 
 template<size_t Capacity, typename T>
-inline ArrayQueue<Capacity, T>::Iterator::Iterator(typename ArrayQueue<Capacity, T>& aq)
+inline ArrayQueue<Capacity, T>::Iterator::Iterator(T* start, T* end)
 	:	
-		_container	(aq), 
-		_start		(&aq._allocator[0]),
-		_current	(&aq._allocator[0]),
-		_end		(&aq._allocator[0] + aq.size())
+		//_container	(aq), 
+		_start		(start),
+		_current	(start),
+		_end		(end)
 {
 	return;
 }
 
 template<size_t Capacity, typename T>
 inline ArrayQueue<Capacity, T>::Iterator::Iterator(const ArrayQueue<Capacity, T>::Iterator& itor)
-	:	_container	(itor._container),
+	:	//_container	(itor._container),
 		_start		(itor._start),
 		_current	(itor._current),
 		_end		(itor._end)
@@ -54,8 +55,8 @@ typename ArrayQueue<Capacity, T>::Iterator& ArrayQueue<Capacity, T>::Iterator::c
 template<size_t Capacity, typename T>
 inline void ArrayQueue<Capacity, T>::Iterator::start()
 {
-	_current	= &_container._allocator[0];
-	_end		= &_container._allocator[0] + _container.size();
+	_current	= _start;
+	_end		= _start /*+ _container.size()*/;
 
 	return;
 }

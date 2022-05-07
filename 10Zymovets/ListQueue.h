@@ -17,6 +17,7 @@ template<typename T>
 class ListQueue : public IQueue<T>
 {
 private:
+	class Iterator;
 	struct Node;
 	Node*	_front;
 	Node*	_back;
@@ -26,6 +27,7 @@ public:
 	~ListQueue();
 	ListQueue(const ListQueue&)				= delete;
 	ListQueue& operator=(const ListQueue&)	= delete;
+	Iterator attach() const { return Iterator(_front); }
 private:
 	virtual inline ostream& do_print(ostream&)	const	override;
 	virtual inline bool		do_empty()			const	override;
@@ -38,6 +40,7 @@ private:
 private:
 	using IQueue<T>::QueueProblem;
 };
+
 
 template<typename T>
 inline ListQueue<T>::ListQueue()
@@ -75,6 +78,12 @@ struct ListQueue<T>::Node
 		return;
 	}
 };
+
+//template<typename T>
+//inline typename ListQueue<T>::Iterator ListQueue<T>::attach() const
+//{
+//	return ListQueue<T>::Iterator(_front);
+//}
 
 template<typename T>
 inline ostream& ListQueue<T>::do_print(ostream& o) const
@@ -128,7 +137,7 @@ template<typename T>
 inline void ListQueue<T>::do_pop()
 {
 	if (IQueue<T>::empty())
-		throw IQueue<T>::BadQueue(QueueProblem::EMPTY_QUEUE_POP); //TODO
+		throw IQueue<T>::BadQueue(QueueProblem::EMPTY_QUEUE_POP);
 	--_size;
 	Node* old_front = _front;
 	_front = _front->_next;
@@ -152,4 +161,6 @@ inline void ListQueue<T>::do_put(const T& value)
 
 	return;
 }
+
+#include "ListQueueIterator.h"
 #endif // !_LIST_QUEUE_
