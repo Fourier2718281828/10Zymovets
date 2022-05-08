@@ -17,7 +17,7 @@ template <bool IsConstant, class T>
 class AbstractIterator
 {
 public:
-	using cond_ref = typename conditional_t<IsConstant, const T&, T&>;
+	using cond_ref = conditional_t<IsConstant, const T&, T&>;
 	class BadIterator;
 public:
 	AbstractIterator()			= default;

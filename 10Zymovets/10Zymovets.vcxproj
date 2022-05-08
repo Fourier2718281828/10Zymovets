@@ -150,6 +150,7 @@
     <ClInclude Include="PeekBack.h" />
     <ClInclude Include="PeekBackArrayQueue.h" />
     <ClInclude Include="PeekBackListQueue.h" />
+    <ClInclude Include="PeekBackUnboundedQueue.h" />
     <ClInclude Include="UnboundedQueue.h" />
   </ItemGroup>
   <ItemGroup>

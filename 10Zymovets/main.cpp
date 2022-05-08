@@ -23,11 +23,10 @@ using std::endl;
 //Const iterators?
 //Make iterator exceptions
 // << based on iterator?
-//make Node outer class?
 
 int main(void)
 {
-	PeekBackListQueue<int> pbb;
+	PeekBackArrayQueue<5, int> pbb;
 	pbb.put(1);
 	pbb.put(2);
 	pbb.put(3);

@@ -1,6 +1,7 @@
 #ifndef _UNBOUNDED_QUEUE_
 #define _UNBOUNDED_QUEUE_
 #include "IQueue.h"
+#include "ArrayQueueIterator.h"
 
 //***********************************************************
 //	Визначити клас абстрактних черг за наведеним нижче 
@@ -17,12 +18,10 @@ template<typename T>
 class UnboundedQueue : public IQueue<T>
 {
 private:
-	//private inner types:
 	using IQueue<T>::QueueProblem;
 public:
-	//inner types for users:
-	class _Iterator;
-	using Iterator = _Iterator;
+	using Iterator = ArrayQueueIterator<false, T>;
+	using ConstIterator = ArrayQueueIterator<true, T>;
 private:
 	size_t _size;
 	size_t _capacity;
@@ -35,6 +34,8 @@ public:
 	~UnboundedQueue();
 	UnboundedQueue(const UnboundedQueue&)				= delete;
 	UnboundedQueue& operator=(const UnboundedQueue&)	= delete;
+	inline ConstIterator attach() const;
+	inline Iterator attach();
 private:
 			inline void		resize(const size_t);
 			inline size_t	next_index(size_t)	const;
@@ -46,7 +47,6 @@ private:
 	virtual inline size_t	do_size()			const	override;
 	virtual inline void		do_pop()					override;
 	virtual inline void		do_put(const T& value)		override;
-
 };
 
 template<typename T>
@@ -66,6 +66,18 @@ inline UnboundedQueue<T>::~UnboundedQueue()
 	delete _allocator;
 	_allocator = nullptr;
 	_size = _capacity = _front = _back = 0;
+}
+
+template<typename T>
+inline typename UnboundedQueue<T>::ConstIterator UnboundedQueue<T>::attach() const
+{
+	return ConstIterator(&_allocator[0], &_allocator[_front], &_allocator[_back], IQueue<T>::capacity());
+}
+
+template<typename T>
+inline typename UnboundedQueue<T>::Iterator UnboundedQueue<T>::attach()
+{
+	return Iterator(&_allocator[0], &_allocator[_front], &_allocator[_back], IQueue<T>::capacity());;
 }
 
 template<typename T>

@@ -26,7 +26,7 @@ private:
 	Node<T>* const		_start;
 	mutable Node<T>*	_current;
 public:
-	ListQueueIterator(Node<T>*);
+	explicit ListQueueIterator(Node<T>*);
 	ListQueueIterator(const ListQueueIterator&);
 	virtual ~ListQueueIterator() = default;
 private:

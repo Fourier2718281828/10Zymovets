@@ -69,6 +69,9 @@
     <ClInclude Include="Node.h">
       <Filter>Header Files\Containers\No PeekBack Containers</Filter>
     </ClInclude>
+    <ClInclude Include="PeekBackUnboundedQueue.h">
+      <Filter>Header Files\Containers\PeekBack Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
