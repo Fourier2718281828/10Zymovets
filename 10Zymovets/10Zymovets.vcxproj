@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClInclude Include="ArrayQueue.h" />
     <ClInclude Include="ArrayQueueIterator.h" />
+    <ClInclude Include="Conditional.h" />
     <ClInclude Include="IQueue.h" />
     <ClInclude Include="AbstractIterator.h" />
     <ClInclude Include="ListQueue.h" />
     <ClInclude Include="ListQueueIterator.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="PeekBack.h" />
     <ClInclude Include="PeekBackArrayQueue.h" />
     <ClInclude Include="PeekBackListQueue.h" />

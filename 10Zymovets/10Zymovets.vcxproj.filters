@@ -28,6 +28,9 @@
     <Filter Include="Header Files\Containers\No PeekBack Containers">
       <UniqueIdentifier>{ca767f7e-d8fd-49fb-b77f-8b3f4561377b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Tools">
+      <UniqueIdentifier>{dad1e866-286c-45f6-a9b2-1ff6903aa264}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IQueue.h">
@@ -59,6 +62,12 @@
     </ClInclude>
     <ClInclude Include="PeekBackListQueue.h">
       <Filter>Header Files\Containers\PeekBack Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Conditional.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Containers\No PeekBack Containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

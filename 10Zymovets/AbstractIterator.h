@@ -1,8 +1,24 @@
 #ifndef _ABSTRACT_ITERATOR_
 #define _ABSTRACT_ITERATOR_
-template <class T>
+#include "Conditional.h"
+
+//***********************************************************
+//	Визначити клас абстрактних черг за наведеним нижче 
+//	зразком. Побудувати реалізації абстрактного класу
+//	а) на базі масиву (обмежена черга)
+//	б) на базі списку
+//	в) на базі масиву (необмежена черга) *** (бонусна опція)
+//	Як в черзі улаштувати підглядання?
+//	Developed by Ruslan Zymovets (SE, group 1) on April 30
+//	Version 1.0
+//***********************************************************
+
+template <bool IsConstant, class T>
 class AbstractIterator
 {
+public:
+	using cond_ref = typename conditional_t<IsConstant, const T&, T&>;
+	class BadIterator;
 public:
 	AbstractIterator()			= default;
 	virtual ~AbstractIterator() = default;
@@ -12,7 +28,7 @@ public:
 	inline const AbstractIterator& operator++()				const;
 	inline const AbstractIterator& operator+=(const size_t)	const;
 	inline const T& operator*()								const;
-	inline T& operator*();
+	inline cond_ref operator*();
 private:
 	virtual inline AbstractIterator& do_clone()										= 0;
 	virtual inline void do_start()													= 0;
@@ -20,46 +36,97 @@ private:
 	virtual inline const AbstractIterator& do_preincrement()				const	= 0;
 	virtual inline const AbstractIterator& do_assign_plus(const size_t)		const	= 0;
 	virtual inline const T& do_operator_star()								const	= 0;
-	virtual inline T& do_operator_star()											= 0;
+	virtual inline cond_ref do_operator_star()										= 0;
+protected:
+	enum class ItorProblem
+	{
+		CONTAINER_MODIFIED,
+		ITERATOR_HAS_STOPPED,
+		POINTER_OUT_OF_BOUNDS,
+	};
 };
 
-template<class T>
-inline AbstractIterator<T>& AbstractIterator<T>::clone()
+template <bool IsConstant, class T>
+inline AbstractIterator<IsConstant, T>& AbstractIterator<IsConstant, T>::clone()
 {
 	return do_clone();
 }
 
-template<class T>
-inline void AbstractIterator<T>::start()
+template <bool IsConstant, class T>
+inline void AbstractIterator<IsConstant, T>::start()
 {
 	do_start();
 	return;
 }
 
-template<class T>
-inline bool AbstractIterator<T>::stop() const
+template <bool IsConstant, class T>
+inline bool AbstractIterator<IsConstant, T>::stop() const
 {
 	return do_stop();
 }
 
-template<class T>
-inline const AbstractIterator<T>& AbstractIterator<T>::operator++() const
+template <bool IsConstant, class T>
+inline const AbstractIterator<IsConstant, T>& AbstractIterator<IsConstant, T>::operator++() const
 {
 	return do_preincrement();
 }
-template<class T>
-inline const AbstractIterator<T>& AbstractIterator<T>::operator+=(const size_t i) const
+
+template <bool IsConstant, class T>
+inline const AbstractIterator<IsConstant, T>& AbstractIterator<IsConstant, T>::operator+=(const size_t i) const
 {
 	return do_assign_plus(i);
 }
-template<class T>
-inline const T& AbstractIterator<T>::operator*() const
+template <bool IsConstant, class T>
+inline const T& AbstractIterator<IsConstant, T>::operator*() const
 {
 	return do_operator_star();
 }
-template<class T>
-inline T& AbstractIterator<T>::operator*()
+template <bool IsConstant, class T>
+inline typename AbstractIterator<IsConstant, T>::cond_ref 
+AbstractIterator<IsConstant, T>::operator*()
 {
 	return do_operator_star();
+}
+
+template <bool IsConstant, class T>
+class AbstractIterator<IsConstant, T>::BadIterator
+{
+private:
+	const std::string _message;
+
+public:
+	BadIterator(const ItorProblem p)
+		: _message(to_string(p))
+	{
+		return;
+	}
+
+	~BadIterator()
+	{
+		return;
+	}
+
+	inline void print_diagnosis(ostream& o) const
+	{
+		o << _message << '\n';
+	}
+private:
+	inline std::string to_string(const ItorProblem) const;
+};
+
+template <bool IsConstant, class T>
+inline std::string AbstractIterator<IsConstant, T>::BadIterator::to_string(const ItorProblem problem) const
+{
+	switch (problem)
+	{
+	case ItorProblem::CONTAINER_MODIFIED:
+		return "Contaiter's modification during iteration.";
+	case ItorProblem::ITERATOR_HAS_STOPPED:
+		return "Iteration via expired iterator.";
+	case ItorProblem::POINTER_OUT_OF_BOUNDS:
+		return "Pointer value exceeds the allowed limits of the queue";
+	default:
+		return "The problem wasn not stated";
+	}
 }
 #endif // !_ABSTRACT_ITERATOR_

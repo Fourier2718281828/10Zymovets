@@ -1,6 +1,7 @@
 #ifndef _ARRAY_QUEUE_
 #define _ARRAY_QUEUE_
 #include "IQueue.h"
+#include "ListQueueIterator.h"
 
 //***********************************************************
 //	Визначити клас абстрактних черг за наведеним нижче 
@@ -21,8 +22,8 @@ private:
 	using IQueue<T>::QueueProblem;
 public:
 	//inner types for users:
-	class _Iterator;
-	using Iterator = _Iterator;
+	//class _Iterator;
+	//using Iterator = _Iterator;
 private:
 	size_t _size;
 	size_t _front;
@@ -33,7 +34,10 @@ public:
 	~ArrayQueue();
 	ArrayQueue(const ArrayQueue&)				= delete;
 	ArrayQueue& operator=(const ArrayQueue&)	= delete;
-	inline Iterator attach();
+	/*inline Iterator attach() const
+	{
+		return _Iterator(&_allocator[_front], &_allocator[_back], &_allocator[0]);
+	}*/
 private:
 			inline size_t	next_index(size_t)	const;
 	virtual inline ostream& do_print(ostream&)	const	override;
@@ -65,11 +69,11 @@ inline ArrayQueue<Capacity, T>::~ArrayQueue()
 	return;
 }
 
-template<size_t Capacity, typename T>
-inline typename ArrayQueue<Capacity, T>::Iterator ArrayQueue<Capacity, T>::attach()
-{
-	return _Iterator(&_allocator[_front], &_allocator[_back]);
-}
+//template<size_t Capacity, typename T>
+//inline typename ArrayQueue<Capacity, T>::Iterator ArrayQueue<Capacity, T>::attach() const
+//{
+//	return _Iterator(&_allocator[_front], &_allocator[_back], &_allocator[0]);
+//}
 
 template<size_t Capacity, typename T>
 inline size_t ArrayQueue<Capacity, T>::next_index(size_t i) const

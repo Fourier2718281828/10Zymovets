@@ -1,93 +1,117 @@
 #ifndef _LIST_QUEUE_ITERATOR_
 #define _LIST_QUEUE_ITERATOR_
 #include "AbstractIterator.h"
-#include "ListQueue.h"
+#include "Node.h"
 
+//***********************************************************
+//	Визначити клас абстрактних черг за наведеним нижче 
+//	зразком. Побудувати реалізації абстрактного класу
+//	а) на базі масиву (обмежена черга)
+//	б) на базі списку
+//	в) на базі масиву (необмежена черга) *** (бонусна опція)
+//	Як в черзі улаштувати підглядання?
+//	Developed by Ruslan Zymovets (SE, group 1) on April 30
+//	Version 1.0
+//***********************************************************
 
-template<typename T>
-class ListQueue<T>::_Iterator : public AbstractIterator<T>
+template<bool IsConstant, typename T>
+class ListQueueIterator : public AbstractIterator<IsConstant, T>
 {
 private:
-	typename ListQueue<T>::Node* const		_start;
-	typename mutable ListQueue<T>::Node*	_current;
+	using AbstractIterator<IsConstant, T>::ItorProblem;
+	using AbstractIterator<IsConstant, T>::BadIterator;
 public:
-	_Iterator(typename ListQueue<T>::Node*);
-	_Iterator(const _Iterator&);
-	virtual ~_Iterator() = default;
+	using cond_ref = AbstractIterator<IsConstant, T>::cond_ref;
 private:
-	virtual _Iterator& do_clone()									override;
-	virtual void do_start()											override;
-	virtual bool do_stop()									const	override;
-	virtual const _Iterator& do_preincrement()				const	override;
-	virtual const _Iterator& do_assign_plus(const size_t)	const 	override;//TODO iterator problems
-	virtual const T& do_operator_star()						const	override;
-	virtual T& do_operator_star()									override;
+	Node<T>* const		_start;
+	mutable Node<T>*	_current;
+public:
+	ListQueueIterator(Node<T>*);
+	ListQueueIterator(const ListQueueIterator&);
+	virtual ~ListQueueIterator() = default;
+private:
+	virtual inline ListQueueIterator& do_clone()									override;
+	virtual inline void do_start()													override;
+	virtual inline bool do_stop()											const	override;
+	virtual inline const ListQueueIterator& do_preincrement()				const	override;
+	virtual inline const ListQueueIterator& do_assign_plus(const size_t)	const 	override;
+	virtual inline const T& do_operator_star()								const	override;
+	virtual inline cond_ref do_operator_star()										override;
+
 };
 
-template<typename T>
-inline ListQueue<T>::_Iterator::_Iterator(typename ListQueue<T>::Node* start)
+template<bool IsConstant, typename T>
+inline ListQueueIterator<IsConstant, T>::ListQueueIterator(Node<T>* start)
 	:	_start(start), _current(start)
 {
 	return;
 }
 
-template<typename T>
-inline ListQueue<T>::_Iterator::_Iterator(typename const ListQueue<T>::_Iterator& it)
+template<bool IsConstant, typename T>
+inline ListQueueIterator<IsConstant, T>::ListQueueIterator(const ListQueueIterator& it)
 	: _start(it._start), _current(it._current)
 {
 	return;
 }
 
-template<typename T>
-inline typename ListQueue<T>::_Iterator& ListQueue<T>::_Iterator::do_clone()
+template<bool IsConstant, typename T>
+inline ListQueueIterator<IsConstant, T>& ListQueueIterator<IsConstant, T>::do_clone()
 {
-	return *(new _Iterator(*this));
+	return *(new ListQueueIterator(*this));
 }
 
-template<typename T>
-inline void ListQueue<T>::_Iterator::do_start()
+template<bool IsConstant, typename T>
+inline void ListQueueIterator<IsConstant, T>::do_start()
 {
 	_current = _start;
 	return;
 }
 
-template<typename T>
-inline bool ListQueue<T>::_Iterator::do_stop() const
+template<bool IsConstant, typename T>
+inline bool ListQueueIterator<IsConstant, T>::do_stop() const
 {
 	return _current == nullptr;
 }
 
-template<typename T>
-inline const typename ListQueue<T>::_Iterator& ListQueue<T>::_Iterator::do_preincrement() const
+template<bool IsConstant, typename T>
+inline const ListQueueIterator<IsConstant, T>& 
+ListQueueIterator<IsConstant, T>::do_preincrement() const
 {
+	if (AbstractIterator<IsConstant, T>::stop())
+	{
+		throw BadIterator(ItorProblem::ITERATOR_HAS_STOPPED);
+	}
 	_current = _current->_next;
 	return *this;
 }
 
-template<typename T>
-inline const typename ListQueue<T>::_Iterator& ListQueue<T>::_Iterator::do_assign_plus(const size_t i0) const
+template<bool IsConstant, typename T>
+inline const ListQueueIterator<IsConstant, T>& 
+ListQueueIterator<IsConstant, T>::do_assign_plus(const size_t i0) const
 {
 	size_t i = i0;
 	while (i --> 0)
 	{
-		if (AbstractIterator<T>::stop())
+		if (AbstractIterator<IsConstant, T>::stop())
 		{
-			throw 1;
+			throw BadIterator(ItorProblem::ITERATOR_HAS_STOPPED);
 		}
 		++(*this);
 	}
 	return *this;
 }
 
-template<typename T>
-inline const T& ListQueue<T>::_Iterator::do_operator_star() const
+template<bool IsConstant, typename T>
+inline const T& ListQueueIterator<IsConstant, T>::do_operator_star() const
 {
 	return _current->_value;
 }
 
-template<typename T>
-inline T& ListQueue<T>::_Iterator::do_operator_star()
+template<bool IsConstant, typename T>
+inline typename ListQueueIterator<IsConstant, T>::cond_ref 
+ListQueueIterator<IsConstant, T>::do_operator_star()
 {
 	return _current->_value;
 }
+
 #endif // !_LIST_QUEUE_ITERATOR_

@@ -1,6 +1,5 @@
 #ifndef _PEEKBACK_LIST_QUEUE_
 #define _PEEKBACK_LIST_QUEUE_
-
 #include "PeekBack.h"
 #include "ListQueue.h"
 
