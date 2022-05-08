@@ -1,7 +1,6 @@
 #ifndef _IQUEUE_
 #define _IQUEUE_
 #include <ostream>
-#include "AbstractIterator.h"
 using std::ostream;
 
 //***********************************************************
@@ -18,33 +17,30 @@ using std::ostream;
 template <typename T>
 class IQueue
 {
-private:
-	using Iterator = AbstractIterator<false, T>;
-	using ConstIterator = AbstractIterator<true, T>;
 public:
 	class BadQueue;
 public:
-	IQueue()								= default;
-	virtual ~IQueue()						= default;
-	IQueue(const IQueue&)					= delete;
-	IQueue& operator=(const IQueue&)		= delete;
+	IQueue() = default;
+	virtual ~IQueue() = default;
+	IQueue(const IQueue&) = delete;
+	IQueue& operator=(const IQueue&) = delete;
 	inline ostream& print(ostream&) const;
 	inline bool		empty()			const;
 	inline bool		full()			const;
-	inline const T&	front()			const;
+	inline const T& front()			const;
 	inline size_t	capacity()		const;
 	inline size_t	size()			const;
 	inline void		pop();
 	inline void		put(const T& value);
 private:
-	virtual inline ostream& do_print(ostream&)	const		= 0;
-	virtual inline bool		do_empty()			const		= 0;
-	virtual inline bool		do_full()			const		= 0;
-	virtual inline const T& do_front()			const		= 0;
-	virtual inline size_t	do_capacity()		const		= 0;
-	virtual inline size_t	do_size()			const		= 0;
-	virtual inline void		do_pop()						= 0;
-	virtual inline void		do_put(const T& value)			= 0;
+	virtual inline ostream& do_print(ostream&)	const	= 0;
+	virtual inline bool		do_empty()			const	= 0;
+	virtual inline bool		do_full()			const	= 0;
+	virtual inline const T& do_front()			const	= 0;
+	virtual inline size_t	do_capacity()		const	= 0;
+	virtual inline size_t	do_size()			const	= 0;
+	virtual inline void		do_pop()					= 0;
+	virtual inline void		do_put(const T& value)		= 0;
 protected:
 	enum class QueueProblem
 	{
@@ -104,12 +100,6 @@ inline ostream& IQueue<T>::print(ostream& o) const
 {
 	return do_print(o);
 }
-
-//template<typename T>
-//ostream& operator<<(ostream& o, const IQueue<T>& q)
-//{
-//	return q.print(o);
-//}
 
 template<typename T>
 ostream& operator<<(ostream& o, const IQueue<T>& q)

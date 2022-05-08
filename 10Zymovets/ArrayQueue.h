@@ -15,7 +15,7 @@
 //***********************************************************
 
 template<size_t Capacity, typename T>
-class ArrayQueue : public IQueue<T>
+class ArrayQueue : virtual public IQueue<T>
 {
 private:
 	using IQueue<T>::QueueProblem;
@@ -30,12 +30,12 @@ private:
 public:
 	ArrayQueue();
 	~ArrayQueue();
-	ArrayQueue(const ArrayQueue&)				= delete;
-	ArrayQueue& operator=(const ArrayQueue&)	= delete;
+	ArrayQueue(const ArrayQueue&) = delete;
+	ArrayQueue& operator=(const ArrayQueue&) = delete;
 	inline ConstIterator attach() const;
 	inline Iterator attach();
 private:
-			inline size_t	next_index(size_t)	const;
+	inline size_t	next_index(size_t)	const;
 	virtual inline ostream& do_print(ostream&)	const	override;
 	virtual inline bool		do_empty()			const	override;
 	virtual inline bool		do_full()			const	override;
@@ -46,14 +46,12 @@ private:
 	virtual inline void		do_put(const T& value)		override;
 };
 
-#include "ArrayQueueIterator.h"
-
 template<typename T>
 class ArrayQueue<0, T>;
 
 template<size_t Capacity, typename T>
 inline ArrayQueue<Capacity, T>::ArrayQueue()
-	: _size(0), _front(0), _back(-1)
+	: IQueue<T>(), _size(0), _front(0), _back(-1)
 {
 	return;
 };
@@ -108,7 +106,7 @@ inline bool ArrayQueue<Capacity, T>::do_full() const
 template<size_t Capacity, typename T>
 inline const T& ArrayQueue<Capacity, T>::do_front() const
 {
-	if (IQueue<T>::empty()) 
+	if (IQueue<T>::empty())
 		throw IQueue<T>::BadQueue(QueueProblem::EMPTY_QUEUE_FRONT);
 	return _allocator[_front];
 }
@@ -128,7 +126,7 @@ inline size_t ArrayQueue<Capacity, T>::do_size() const
 template<size_t Capacity, typename T>
 inline void ArrayQueue<Capacity, T>::do_pop()
 {
-	if (IQueue<T>::empty()) 
+	if (IQueue<T>::empty())
 		throw IQueue<T>::BadQueue(QueueProblem::EMPTY_QUEUE_POP);
 	--_size;
 	_front = next_index(_front);
@@ -137,7 +135,7 @@ inline void ArrayQueue<Capacity, T>::do_pop()
 template<size_t Capacity, typename T>
 inline void ArrayQueue<Capacity, T>::do_put(const T& value)
 {
-	if (IQueue<T>::full()) 
+	if (IQueue<T>::full())
 		throw IQueue<T>::BadQueue(QueueProblem::FULL_QUEUE_PUT);
 	++_size;
 	_allocator[_back = next_index(_back)] = value;

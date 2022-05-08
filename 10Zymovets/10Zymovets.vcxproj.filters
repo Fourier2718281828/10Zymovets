@@ -66,11 +66,14 @@
     <ClInclude Include="Conditional.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files\Containers\No PeekBack Containers</Filter>
-    </ClInclude>
     <ClInclude Include="PeekBackUnboundedQueue.h">
       <Filter>Header Files\Containers\PeekBack Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="PeekBackQueue.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

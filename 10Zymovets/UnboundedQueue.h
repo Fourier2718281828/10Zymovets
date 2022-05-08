@@ -15,7 +15,7 @@
 //***********************************************************
 
 template<typename T>
-class UnboundedQueue : public IQueue<T>
+class UnboundedQueue : virtual public IQueue<T>
 {
 private:
 	using IQueue<T>::QueueProblem;
@@ -54,7 +54,8 @@ const size_t UnboundedQueue<T>::DEFAULT_CAPACITY = 0;
 
 template<typename T>
 inline UnboundedQueue<T>::UnboundedQueue(const size_t capacity)
-	:	_size(0), _capacity(capacity), _front(0),
+	:	IQueue<T>(),
+		_size(0), _capacity(capacity), _front(0),
 		_back(-1), _allocator(new T[capacity])
 {
 	return;

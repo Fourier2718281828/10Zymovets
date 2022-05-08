@@ -1,6 +1,6 @@
 #ifndef _PEEKBACK_LIST_QUEUE_
 #define _PEEKBACK_LIST_QUEUE_
-#include "PeekBack.h"
+#include "PeekBackQueue.h"
 #include "ListQueue.h"
 
 //***********************************************************
@@ -15,7 +15,7 @@
 //***********************************************************
 
 template<typename T>
-class PeekBackListQueue : public ListQueue<T>, public PeekBack<T>
+class PeekBackListQueue : public ListQueue<T>, public IPeekBackQueue<T>
 {
 public:
 	PeekBackListQueue()										= default;

@@ -1,6 +1,6 @@
 #ifndef _PEEKBACK_ARRAY_QUEUE_
 #define _PEEKBACK_ARRAY_QUEUE_
-#include "PeekBack.h"
+#include "PeekBackQueue.h"
 #include "ArrayQueue.h"
 
 //***********************************************************
@@ -15,7 +15,7 @@
 //***********************************************************
 
 template<size_t Capacity, typename T>
-class PeekBackArrayQueue : public ArrayQueue<Capacity, T>, public PeekBack<T>
+class PeekBackArrayQueue : public ArrayQueue<Capacity, T>, public IPeekBackQueue<T>
 {
 public:
 	PeekBackArrayQueue()										= default;

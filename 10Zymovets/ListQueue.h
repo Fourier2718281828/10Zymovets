@@ -15,7 +15,7 @@
 //***********************************************************
 
 template<typename T>
-class ListQueue : public IQueue<T>
+class ListQueue : virtual public IQueue<T>
 {
 private:
 	using IQueue<T>::QueueProblem;
@@ -46,7 +46,7 @@ private:
 
 template<typename T>
 inline ListQueue<T>::ListQueue()
-	: _front(nullptr), _back(nullptr), _size(0)
+	: IQueue<T>(), _front(nullptr), _back(nullptr), _size(0)
 {
 	return;
 }

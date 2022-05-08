@@ -1,6 +1,6 @@
 #ifndef _PEEK_BACK_UNBOUNDED_QUEUE_
 #define _PEEK_BACK_UNBOUNDED_QUEUE_
-#include "PeekBack.h"
+#include "PeekBackQueue.h"
 #include "UnboundedQueue.h"
 
 //***********************************************************
@@ -15,7 +15,7 @@
 //***********************************************************
 
 template<typename T>
-class PeekBackUnboundedQueue : public UnboundedQueue<T>, public PeekBack<T>
+class PeekBackUnboundedQueue : public UnboundedQueue<T>, public IPeekBackQueue<T>
 {
 public:
 	PeekBackUnboundedQueue() = default;
