@@ -15,6 +15,7 @@ public:
 	_Iterator(T*, T*);
 	_Iterator(const _Iterator&);
 	virtual ~_Iterator()	= default;
+private:
 	virtual _Iterator& do_clone()									override;
 	virtual void do_start()											override;
 	virtual bool do_stop()									const	override;
@@ -45,7 +46,7 @@ inline ArrayQueue<Capacity, T>::_Iterator::_Iterator(const ArrayQueue<Capacity, 
 template<size_t Capacity, typename T> inline 
 typename ArrayQueue<Capacity, T>::_Iterator& ArrayQueue<Capacity, T>::_Iterator::do_clone()
 {
-	return *(new Iterator(*this));
+	return *(new _Iterator(*this));
 }
 
 template<size_t Capacity, typename T>
@@ -58,14 +59,15 @@ inline void ArrayQueue<Capacity, T>::_Iterator::do_start()
 template<size_t Capacity, typename T>
 inline bool ArrayQueue<Capacity, T>::_Iterator::do_stop() const
 {
-	return _current == _end;
+	return false;
 }
 
 template<size_t Capacity, typename T>
 inline const typename ArrayQueue<Capacity, T>::_Iterator&
 ArrayQueue<Capacity, T>::_Iterator::do_preincrement() const
 {
-	++_current;
+	/*const size_t tmp = next_index(*_current);
+	_current = (tmp == start) ? nullptr : tmp;*/
 	return *this;
 }
 

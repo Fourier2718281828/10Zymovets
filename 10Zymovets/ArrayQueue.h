@@ -18,10 +18,10 @@ class ArrayQueue : public IQueue<T>
 {
 private:
 	//private inner types:
-	class _Iterator;
 	using IQueue<T>::QueueProblem;
 public:
 	//inner types for users:
+	class _Iterator;
 	using Iterator = _Iterator;
 private:
 	size_t _size;
@@ -68,7 +68,7 @@ inline ArrayQueue<Capacity, T>::~ArrayQueue()
 template<size_t Capacity, typename T>
 inline typename ArrayQueue<Capacity, T>::Iterator ArrayQueue<Capacity, T>::attach()
 {
-	return _Iterator(&_allocator[0], &_allocator[0]);
+	return _Iterator(&_allocator[_front], &_allocator[_back]);
 }
 
 template<size_t Capacity, typename T>

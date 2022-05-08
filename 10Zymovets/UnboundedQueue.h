@@ -17,7 +17,13 @@ template<typename T>
 class UnboundedQueue : public IQueue<T>
 {
 private:
+	//private inner types:
+	using IQueue<T>::QueueProblem;
+public:
+	//inner types for users:
 	class _Iterator;
+	using Iterator = _Iterator;
+private:
 	size_t _size;
 	size_t _capacity;
 	size_t _front;
@@ -40,12 +46,7 @@ private:
 	virtual inline size_t	do_size()			const	override;
 	virtual inline void		do_pop()					override;
 	virtual inline void		do_put(const T& value)		override;
-private:
-	//private inner types:
-	using IQueue<T>::QueueProblem;
-public:
-	//inner types for users:
-	using iterator = _Iterator;
+
 };
 
 template<typename T>

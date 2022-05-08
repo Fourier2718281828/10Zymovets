@@ -14,6 +14,7 @@ public:
 	_Iterator(typename ListQueue<T>::Node*);
 	_Iterator(const _Iterator&);
 	virtual ~_Iterator() = default;
+private:
 	virtual _Iterator& do_clone()									override;
 	virtual void do_start()											override;
 	virtual bool do_stop()									const	override;

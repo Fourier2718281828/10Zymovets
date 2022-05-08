@@ -18,10 +18,10 @@ class ListQueue : public IQueue<T>
 {
 private:
 	//private inner types:
-	class _Iterator;
 	using IQueue<T>::QueueProblem;
 public:
 	//inner types for users:
+	class _Iterator;
 	using Iterator = _Iterator;
 private:
 	struct Node;
