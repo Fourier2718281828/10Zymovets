@@ -1,6 +1,8 @@
 #ifndef _ABSTRACT_ITERATOR_
 #define _ABSTRACT_ITERATOR_
 #include "Conditional.h"
+#include <ostream>
+using std::ostream;
 
 //***********************************************************
 //	Визначити клас абстрактних черг за наведеним нижче 

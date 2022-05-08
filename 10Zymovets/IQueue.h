@@ -1,6 +1,7 @@
 #ifndef _IQUEUE_
 #define _IQUEUE_
 #include <ostream>
+#include "AbstractIterator.h"
 using std::ostream;
 
 //***********************************************************
@@ -17,6 +18,11 @@ using std::ostream;
 template <typename T>
 class IQueue
 {
+private:
+	using Iterator = AbstractIterator<false, T>;
+	using ConstIterator = AbstractIterator<true, T>;
+public:
+	class BadQueue;
 public:
 	IQueue()								= default;
 	virtual ~IQueue()						= default;
@@ -39,8 +45,6 @@ private:
 	virtual inline size_t	do_size()			const		= 0;
 	virtual inline void		do_pop()						= 0;
 	virtual inline void		do_put(const T& value)			= 0;
-public:
-	class BadQueue;
 protected:
 	enum class QueueProblem
 	{
@@ -100,6 +104,12 @@ inline ostream& IQueue<T>::print(ostream& o) const
 {
 	return do_print(o);
 }
+
+//template<typename T>
+//ostream& operator<<(ostream& o, const IQueue<T>& q)
+//{
+//	return q.print(o);
+//}
 
 template<typename T>
 ostream& operator<<(ostream& o, const IQueue<T>& q)

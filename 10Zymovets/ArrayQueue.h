@@ -44,7 +44,6 @@ private:
 	virtual inline size_t	do_size()			const	override;
 	virtual inline void		do_pop()					override;
 	virtual inline void		do_put(const T& value)		override;
-
 };
 
 #include "ArrayQueueIterator.h"
