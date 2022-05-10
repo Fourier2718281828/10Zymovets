@@ -19,6 +19,8 @@ namespace lab10
 	template<size_t Capacity, typename T>
 	class PeekBackArrayQueue : public ArrayQueue<Capacity, T>, public IPeekBackQueue<T>
 	{
+	private:
+		using IQueue<T>::QueueProblem;
 	public:
 		PeekBackArrayQueue() = default;
 		virtual ~PeekBackArrayQueue() = default;
@@ -31,6 +33,10 @@ namespace lab10
 	template<size_t Capacity, typename T>
 	inline const T& PeekBackArrayQueue<Capacity, T>::do_peekback(const size_t i) const
 	{
+		if (i >= IQueue<T>::size())
+		{
+			throw IQueue<T>::BadQueue(QueueProblem::PEEKBACK_INDEX_OUT_OF_BOUNDS);
+		}
 		auto& itor(ArrayQueue<Capacity, T>::attach());
 		const T& res(*(itor += i));
 		delete& itor;

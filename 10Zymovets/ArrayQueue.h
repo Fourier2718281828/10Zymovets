@@ -38,7 +38,6 @@ namespace lab10
 		virtual inline Iterator& attach()					override;
 	private:
 		inline size_t	next_index(size_t)	const;
-		virtual inline ostream& do_print(ostream&)	const	override;
 		virtual inline bool		do_empty()			const	override;
 		virtual inline bool		do_full()			const	override;
 		virtual inline const T& do_front()			const	override;
@@ -97,17 +96,6 @@ namespace lab10
 	inline size_t ArrayQueue<Capacity, T>::next_index(size_t i) const
 	{
 		return (i + 1) % IQueue<T>::capacity();
-	}
-
-	template<size_t Capacity, typename T>
-	inline ostream& ArrayQueue<Capacity, T>::do_print(ostream& o) const
-	{
-		o << '[';
-		for (size_t i = _front; i != next_index(_back); i = next_index(i))
-		{
-			o << _allocator[i] << ((i == _back) ? "" : ", ");
-		}
-		return o << ']' << ':' << '(' << IQueue<T>::size() << '/' << IQueue<T>::capacity() << ')';
 	}
 
 	template<size_t Capacity, typename T>

@@ -23,93 +23,122 @@ using namespace lab10;
 //***********************************************************
 
 template<typename T>
-void test(IPeekBackQueue<T>& pbb)
+void testQueues(IQueue<T>& p)
 {
+	cout << typeid(p).name() << endl;
+	cout << "1). Putting some elements : " << endl;
+	try
+	{
+		for (int i = 0; i < 6; ++i)
+		{
+			p.put(i);
+			cout << p << endl;
+		}
+	}
+	catch (const IQueue<T>::BadQueue& bq)
+	{
+		cout << "--Exception: ";
+		bq.print_diagnosis(cout);
+	}
 
-	cout << "--------------------------" << endl;
-	pbb.put(1);
-	cout << pbb << endl;
-	pbb.put(2);
-	cout << pbb << endl;
-	pbb.put(3);
-	cout << pbb << endl;
-	pbb.put(4);
-	cout << pbb << endl;
-
-	for (int i = 0; i < pbb.size(); ++i)
-		cout << pbb.peekback(i) << endl;
-
-	/*auto itorr = pbb.attach();
-	*itorr = 10;*/
-	cout << pbb << endl;
+	cout << "2). Now popping till empty (we also use front() method there):" << endl;
+	try
+	{
+		typename IQueue<T>::Type front;
+		while (!p.empty())
+		{
+			front = p.front();
+			p.pop();
+			cout << p << " --popped elem : " << front  << endl;
+		}
+		p.pop();
+	}
+	catch (const IQueue<T>::BadQueue& bq)
+	{
+		cout << "--Exception: ";
+		bq.print_diagnosis(cout);
+	}
 
 	try
 	{
-		pbb.pop();
-		cout << pbb << endl;
-		pbb.pop();
-		cout << pbb << endl;
-		pbb.pop();
-		cout << pbb << endl;
-		pbb.pop();
-		cout << pbb << endl;
-		pbb.pop();
-		cout << pbb << endl;
+		cout << "3). Now let's try to get the front() of empty queue:" << endl;
+		p.front();
 	}
-	catch (const IQueue<T>::BadQueue& er)
+	catch (const IQueue<T>::BadQueue& bq)
 	{
-		er.print_diagnosis(std::cerr);
+		cout << "--Exception: ";
+		bq.print_diagnosis(cout);
 	}
 
-	pbb.put(1);
-	cout << pbb << endl;
-	pbb.put(2);
-	cout << pbb << endl;
-	pbb.put(3);
-	cout << pbb << endl;
-	pbb.put(4);
-	cout << pbb << endl;
-	pbb.pop();
-	cout << pbb << endl;
-	pbb.put(5);
-	cout << pbb << endl;
+	for (int i = 0; i < 5; ++i)
+	{
+		p.put(i);
+	}
 
+	cout << "4). Testing iterators :" << endl;
+	typename IQueue<T>::Iterator& itor(p.attach());
+	cout << "Our queue: " << p << endl;
+	cout << "Let's modify the 3rd element using non-const iterator :" << endl;
+	itor += 3;
+	*itor = 10;
+	cout << "*(itor += 3) = 10;" << endl;
+	cout << "Result : " << p << endl;
+	cout << "Don't forget to free memory: delete& itor;" << endl;
+	delete& itor;
 
-	for (int i = 0; i < pbb.size(); ++i)
-		cout << pbb.peekback(i) << endl;
-	cout << pbb << endl;
-	cout << "--------------------------" << endl;
+	cout << "-------------------------------------------------------------------" << endl;
+}
+
+template<typename T>
+void testPeekBackQueues(IPeekBackQueue<T>& p)
+{
+	cout << typeid(p).name() << endl;
+	for (int i = 0; i < 4; ++i) p.put(i);
+	cout << "Our PeekBackQueue : " << p << endl;
+	cout << "Let's peekBack all the elements :" << endl;
+	for (int i = 0; i < p.size(); ++i)
+	{
+		cout << p.peekback(i) << ' ';
+	}
+	cout << endl;
+	try
+	{
+		cout << "Let's try to peek the non-existent element:" << endl;
+		cout << p.peekback(5) << endl;
+	}
+	catch (const IQueue<T>::BadQueue& bq)
+	{
+		cout << "--Exception: ";
+		bq.print_diagnosis(cout);
+	}
+	cout << "-------------------------------------------------------------------" << endl;
 }
 
 int main(void)
 {
-	PeekBackArrayQueue<5, int> p1;
-	PeekBackListQueue<int> p2;
-	PeekBackUnboundedQueue<int> p3;//PROBLEM HERE (iTERATOR WRONG)
-	/*pbb.put(1);
-	pbb.put(2);
-	pbb.put(3);
-	pbb.put(4);
-	pbb.pop();
-	pbb.pop();
-	pbb.pop();
-	pbb.pop();
-	pbb.put(1);
-	pbb.put(2);
-	pbb.put(3);
-	pbb.put(4);
-	pbb.pop();
-	pbb.put(5);*/
+	ArrayQueue<5, int> p1;
+	ListQueue<int> p2;
+	UnboundedQueue<int> p3;
+	
+	testQueues(p1);
+	testQueues(p2);
+	testQueues(p3);
 
-	
-	test(p1);
-	test(p2);
-	test(p3);//PROBLEM HERE!!!
-	
-	ArrayQueue<2, int> a;
-	ArrayQueue<2, int>::Iterator& itor(a.attach());
-	IQueue<int>::Iterator & it_ref = itor;
-	delete& itor;
+	PeekBackArrayQueue<5, int> pb1;
+	PeekBackListQueue<int> pb2;
+	PeekBackUnboundedQueue<int> pb3;
+
+	testPeekBackQueues(pb1);
+	testPeekBackQueues(pb2);
+	testPeekBackQueues(pb3);
+
+	cout << "If we wanted to attach the iterator to a const container :" << endl;
+	const ListQueue<int> lq;
+	cout << "const ListQueue<int> lq;" << endl;
+	ListQueue<int>::ConstIterator itor(lq.attach());
+	cout << "ListQueue<int>::ConstIterator itor(lq.attach());" << endl;
+	cout << "We would get the const iterator. And modification is now impossible." << endl;
+	//*itor = 20;
 
 	return 0;
 }

@@ -24,12 +24,12 @@ namespace lab10
 		class BadQueue;
 		using Iterator = AbstractIterator<false, T>;
 		using ConstIterator = AbstractIterator<true, T>;
+		using Type = T;
 	public:
 		IQueue() = default;
 		virtual ~IQueue() = default;
 		IQueue(const IQueue&) = delete;
 		IQueue& operator=(const IQueue&) = delete;
-		inline ostream& print(ostream&) const;
 		inline bool		empty()			const;
 		inline bool		full()			const;
 		inline const T& front()			const;
@@ -38,17 +38,16 @@ namespace lab10
 		inline void		pop();
 		inline void		put(const T& value);
 	public:
-		virtual inline	ConstIterator& attach()		const = 0;
-		virtual inline	Iterator& attach() = 0;
+		virtual inline	ConstIterator& attach()		const	= 0;
+		virtual inline	Iterator& attach()					= 0;
 	private:
-		virtual inline ostream& do_print(ostream&)	const = 0;
-		virtual inline bool		do_empty()			const = 0;
-		virtual inline bool		do_full()			const = 0;
-		virtual inline const T& do_front()			const = 0;
-		virtual inline size_t	do_capacity()		const = 0;
-		virtual inline size_t	do_size()			const = 0;
-		virtual inline void		do_pop() = 0;
-		virtual inline void		do_put(const T& value) = 0;
+		virtual inline bool		do_empty()			const	= 0;
+		virtual inline bool		do_full()			const	= 0;
+		virtual inline const T& do_front()			const	= 0;
+		virtual inline size_t	do_capacity()		const	= 0;
+		virtual inline size_t	do_size()			const	= 0;
+		virtual inline void		do_pop()					= 0;
+		virtual inline void		do_put(const T& value)		= 0;
 	protected:
 		enum class QueueProblem
 		{
@@ -102,18 +101,6 @@ namespace lab10
 		do_put(value);
 		return;
 	}
-
-	template<typename T>
-	inline ostream& IQueue<T>::print(ostream& o) const
-	{
-		return do_print(o);
-	}
-
-	/*template<typename T>
-	ostream& operator<<(ostream& o, const IQueue<T>& q)
-	{
-		return q.print(o);
-	}*/
 
 	template<typename T>
 	ostream& operator<<(ostream& o, const IQueue<T>& q)

@@ -40,7 +40,6 @@ namespace lab10
 	private:
 		inline void		resize(const size_t);
 		inline size_t	next_index(size_t)	const;
-		virtual inline ostream& do_print(ostream&)	const	override;
 		virtual inline bool		do_empty()			const	override;
 		virtual inline bool		do_full()			const	override;
 		virtual inline const T& do_front()			const	override;
@@ -129,17 +128,6 @@ namespace lab10
 	inline size_t UnboundedQueue<T>::next_index(size_t i) const
 	{
 		return (i < IQueue<T>::capacity()) ? (i + 1) : 0;
-	}
-
-	template<typename T>
-	inline ostream& UnboundedQueue<T>::do_print(ostream& o) const
-	{
-		o << '[';
-		for (size_t i = _front; i != next_index(_back); i = next_index(i))
-		{
-			o << _allocator[i] << ((i == _back) ? "" : ", ");
-		}
-		return o << ']' << ':' << IQueue<T>::size() << '/' << IQueue<T>::capacity();
 	}
 
 	template<typename T>

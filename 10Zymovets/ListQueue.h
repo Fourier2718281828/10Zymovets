@@ -36,7 +36,6 @@ namespace lab10
 		virtual inline ConstIterator& attach()		const	override;
 		virtual inline Iterator& attach()					override;
 	private:
-		virtual inline ostream& do_print(ostream&)	const	override;
 		virtual inline bool		do_empty()			const	override;
 		virtual inline bool		do_full()			const	override;
 		virtual inline const T& do_front()			const	override;
@@ -80,23 +79,6 @@ namespace lab10
 	inline typename ListQueue<T>::Iterator& ListQueue<T>::attach()
 	{
 		return *(new Iterator(_front));
-	}
-
-	template<typename T>
-	inline ostream& ListQueue<T>::do_print(ostream& o) const
-	{
-		o << '[';
-		Node<T>* itor = _front;
-		while (itor)
-		{
-			o << itor->_value;
-			if (itor = itor->_next)
-			{
-				o << ", ";
-			}
-		}
-
-		return o << ']' << ':' << IQueue<T>::size();
 	}
 
 	template<typename T>

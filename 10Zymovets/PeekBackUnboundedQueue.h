@@ -19,6 +19,8 @@ namespace lab10
 	template<typename T>
 	class PeekBackUnboundedQueue : public UnboundedQueue<T>, public IPeekBackQueue<T>
 	{
+	private:
+		using IQueue<T>::QueueProblem;
 	public:
 		PeekBackUnboundedQueue() = default;
 		virtual ~PeekBackUnboundedQueue() = default;
@@ -31,6 +33,10 @@ namespace lab10
 	template<typename T>
 	inline const T& PeekBackUnboundedQueue<T>::do_peekback(const size_t i) const
 	{
+		if (i >= IQueue<T>::size())
+		{
+			throw IQueue<T>::BadQueue(QueueProblem::PEEKBACK_INDEX_OUT_OF_BOUNDS);
+		}
 		auto& itor(UnboundedQueue<T>::attach());
 		const T& res(*(itor += i));
 		delete& itor;
