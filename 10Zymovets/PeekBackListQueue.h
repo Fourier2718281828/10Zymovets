@@ -14,22 +14,27 @@
 //	Version 1.0
 //***********************************************************
 
-template<typename T>
-class PeekBackListQueue : public ListQueue<T>, public IPeekBackQueue<T>
+namespace lab10
 {
-public:
-	PeekBackListQueue()										= default;
-	virtual ~PeekBackListQueue()							= default;
-	PeekBackListQueue(const PeekBackListQueue&)				= delete;
-	PeekBackListQueue& operator=(const PeekBackListQueue&)	= delete;
-private:
-	virtual inline const T& do_peekback(const size_t) const override;
-};
+	template<typename T>
+	class PeekBackListQueue : public ListQueue<T>, public IPeekBackQueue<T>
+	{
+	public:
+		PeekBackListQueue() = default;
+		virtual ~PeekBackListQueue() = default;
+		PeekBackListQueue(const PeekBackListQueue&) = delete;
+		PeekBackListQueue& operator=(const PeekBackListQueue&) = delete;
+	private:
+		virtual inline const T& do_peekback(const size_t) const override;
+	};
 
-template<typename T>
-inline const T& PeekBackListQueue<T>::do_peekback(const size_t i) const
-{
-	return *(ListQueue<T>::attach() += i);
+	template<typename T>
+	inline const T& PeekBackListQueue<T>::do_peekback(const size_t i) const
+	{
+		auto& itor(ListQueue<T>::attach());
+		const T& res(*(itor += i));
+		delete& itor;
+		return res;
+	}
 }
-
 #endif // !_PEEKBACK_LIST_QUEUE_

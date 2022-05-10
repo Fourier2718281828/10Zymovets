@@ -12,20 +12,23 @@
 //	Version 1.0
 //***********************************************************
 
-template<typename T>
-class PeekBack
+namespace lab10
 {
-public:
-	PeekBack()							= default;
-	virtual ~PeekBack()					= default;
-	inline const T& peekback(const size_t) const;
-private:
-	virtual inline const T& do_peekback(const size_t) const = 0;
-};
+	template<typename T>
+	class PeekBack
+	{
+	public:
+		PeekBack() = default;
+		virtual ~PeekBack() = default;
+		inline const T& peekback(const size_t) const;
+	private:
+		virtual inline const T& do_peekback(const size_t) const = 0;
+	};
 
-template<typename T>
-inline const T& PeekBack<T>::peekback(const size_t i) const
-{
-	return do_peekback(i);
+	template<typename T>
+	inline const T& PeekBack<T>::peekback(const size_t i) const
+	{
+		return do_peekback(i);
+	}
 }
 #endif // !_PEEK_BACK_

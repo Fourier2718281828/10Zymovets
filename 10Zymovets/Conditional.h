@@ -7,22 +7,24 @@
 * useful tools, but understand their inner structure
 * 
 * I needed "conditional" to avoid implementing const 
-* iterators separately from non-const ones
+* iterators separately from non-const ones. Those are separate
+* as types, but in code the're represented by one template.
 */
-
-template<bool Condition, typename T, typename U>
-struct conditional
+namespace lab10
 {
-	using _type = T;
-};
+	template<bool Condition, typename T, typename U>
+	struct conditional
+	{
+		using _type = T;
+	};
 
-template<typename T, typename U>
-struct conditional<false, T, U>
-{
-	using _type = U;
-};
+	template<typename T, typename U>
+	struct conditional<false, T, U>
+	{
+		using _type = U;
+	};
 
-template<bool Condition, typename T, typename U>
-using conditional_t = typename conditional<Condition, T, U>::_type;
-
+	template<bool Condition, typename T, typename U>
+	using conditional_t = typename conditional<Condition, T, U>::_type;
+}
 #endif // !_MY_CONDITIONAL_

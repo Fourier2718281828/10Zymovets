@@ -5,9 +5,11 @@
 #include "PeekBackListQueue.h"
 #include "PeekBackUnboundedQueue.h"
 #include <iostream>
+#include <stack>
 
 using std::cout;
 using std::endl;
+using namespace lab10;
 
 //***********************************************************
 //	Визначити клас абстрактних черг за наведеним нижче 
@@ -28,6 +30,7 @@ using std::endl;
 template<typename T>
 void test(IPeekBackQueue<T>& pbb)
 {
+
 	cout << "--------------------------" << endl;
 	pbb.put(1);
 	pbb.put(2);
@@ -64,6 +67,7 @@ void test(IPeekBackQueue<T>& pbb)
 
 	for (int i = 0; i < pbb.size(); ++i)
 		cout << pbb.peekback(i) << endl;
+	cout << pbb << endl;
 	cout << "--------------------------" << endl;
 }
 
@@ -71,12 +75,31 @@ int main(void)
 {
 	PeekBackArrayQueue<5, int> p1;
 	PeekBackListQueue<int> p2;
-	PeekBackUnboundedQueue<int> p3;
+	PeekBackUnboundedQueue<int> p3;//PROBLEM HERE (iTERATOR WRONG)
+	/*pbb.put(1);
+	pbb.put(2);
+	pbb.put(3);
+	pbb.put(4);
+	pbb.pop();
+	pbb.pop();
+	pbb.pop();
+	pbb.pop();
+	pbb.put(1);
+	pbb.put(2);
+	pbb.put(3);
+	pbb.put(4);
+	pbb.pop();
+	pbb.put(5);*/
 
+	
 	test(p1);
 	test(p2);
 	test(p3);//PROBLEM HERE!!!
 	
+	ArrayQueue<2, int> a;
+	ArrayQueue<2, int>::Iterator& itor(a.attach());
+	IQueue<int>::Iterator & it_ref = itor;
+	delete& itor;
 
 	return 0;
 }

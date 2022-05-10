@@ -14,21 +14,27 @@
 //	Version 1.0
 //***********************************************************
 
-template<size_t Capacity, typename T>
-class PeekBackArrayQueue : public ArrayQueue<Capacity, T>, public IPeekBackQueue<T>
+namespace lab10
 {
-public:
-	PeekBackArrayQueue()										= default;
-	virtual ~PeekBackArrayQueue()								= default;
-	PeekBackArrayQueue(const PeekBackArrayQueue&)				= delete;
-	PeekBackArrayQueue& operator=(const PeekBackArrayQueue&)	= delete;
-private:
-	virtual inline const T& do_peekback(const size_t) const override;
-};
+	template<size_t Capacity, typename T>
+	class PeekBackArrayQueue : public ArrayQueue<Capacity, T>, public IPeekBackQueue<T>
+	{
+	public:
+		PeekBackArrayQueue() = default;
+		virtual ~PeekBackArrayQueue() = default;
+		PeekBackArrayQueue(const PeekBackArrayQueue&) = delete;
+		PeekBackArrayQueue& operator=(const PeekBackArrayQueue&) = delete;
+	private:
+		virtual inline const T& do_peekback(const size_t) const override;
+	};
 
-template<size_t Capacity, typename T>
-inline const T& PeekBackArrayQueue<Capacity, T>::do_peekback(const size_t i) const
-{
-	return *(ArrayQueue<Capacity, T>::attach() += i);
+	template<size_t Capacity, typename T>
+	inline const T& PeekBackArrayQueue<Capacity, T>::do_peekback(const size_t i) const
+	{
+		auto& itor(ArrayQueue<Capacity, T>::attach());
+		const T& res(*(itor += i));
+		delete& itor;
+		return res;
+	}
 }
 #endif // !_PEEKBACK_ARRAY_QUEUE_
