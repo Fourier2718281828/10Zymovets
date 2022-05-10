@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="lab10::AbstractIterator&lt;IsConstant, T&gt;" Collapsed="true">
+    <Position X="2.5" Y="1" Width="2.75" />
+    <NestedTypes>
+      <Class Name="lab10::AbstractIterator&lt;IsConstant, T&gt;::BadIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>AbstractIterator.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Enum Name="lab10::AbstractIterator&lt;IsConstant, T&gt;::ItorProblem" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>AbstractIterator.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAACAFAAAAAAAAgQAAAAQIAAAAgAQAQABAgEAAAAAA=</HashCode>
+      <FileName>AbstractIterator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::ArrayQueueIterator&lt;IsConstant, T&gt;" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAACAFAAAACgAAgAEAAAAQAAAAAAQACABAABAYAAAA=</HashCode>
+      <FileName>ArrayQueueIterator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::ListQueueIterator&lt;IsConstant, T&gt;" Collapsed="true">
+    <Position X="4.75" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAFAAAAAgIAgAAAAAAAAAAAAAQAAABAADAAAAAA=</HashCode>
+      <FileName>ListQueueIterator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="lab10::conditional&lt;Condition, T, U&gt;" Collapsed="true">
+    <Position X="8.5" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditional.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

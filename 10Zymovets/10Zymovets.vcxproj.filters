@@ -81,4 +81,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="QueueHierarchy.cd" />
+    <None Include="IteratorsHierarchy.cd" />
+  </ItemGroup>
 </Project>

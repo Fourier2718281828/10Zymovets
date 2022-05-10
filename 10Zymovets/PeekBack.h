@@ -18,7 +18,7 @@ namespace lab10
 	class PeekBack
 	{
 	public:
-		PeekBack() = default;
+		PeekBack()			= default;
 		virtual ~PeekBack() = default;
 		inline const T& peekback(const size_t) const;
 	private:

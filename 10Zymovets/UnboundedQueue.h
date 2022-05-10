@@ -33,8 +33,8 @@ namespace lab10
 	public:
 		explicit UnboundedQueue(const size_t = DEFAULT_CAPACITY);
 		~UnboundedQueue();
-		UnboundedQueue(const UnboundedQueue&) = delete;
-		UnboundedQueue& operator=(const UnboundedQueue&) = delete;
+		UnboundedQueue(const UnboundedQueue&)				= delete;
+		UnboundedQueue& operator=(const UnboundedQueue&)	= delete;
 		virtual inline ConstIterator& attach()		const	override;
 		virtual inline Iterator& attach()					override;
 	private:

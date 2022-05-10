@@ -10,6 +10,7 @@
 * iterators separately from non-const ones. Those are separate
 * as types, but in code the're represented by one template.
 */
+
 namespace lab10
 {
 	template<bool Condition, typename T, typename U>

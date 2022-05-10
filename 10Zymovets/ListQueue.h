@@ -13,6 +13,7 @@
 //	Developed by Ruslan Zymovets (SE, group 1) on April 30
 //	Version 1.0
 //***********************************************************
+
 namespace lab10
 {
 	template<typename T>

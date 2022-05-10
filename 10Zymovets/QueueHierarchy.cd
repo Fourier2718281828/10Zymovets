@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="lab10::IQueue&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUACEAAABwAAAAAIIIAAIACRAACEACAAAAgAEAQAAA=</HashCode>
+      <FileName>IQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::ArrayQueue&lt;Capacity, T&gt;" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAIAAwBBAEAIAAAAAAAUAAAEECAAAAgAEIQAAA=</HashCode>
+      <FileName>ArrayQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::ListQueue&lt;T&gt;" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAIAAwABAAAIQAAAAAAQAAAEACAAAAgAEIQAQA=</HashCode>
+      <FileName>ListQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::UnboundedQueue&lt;T&gt;" Collapsed="true">
+    <Position X="5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEBIAAwBBAEAIABAAAQAQAAAEACAAQAiAEIQAAA=</HashCode>
+      <FileName>UnboundedQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::IPeekBackQueue&lt;T&gt;" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>PeekBackQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::PeekBack&lt;T&gt;" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAEAAABAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>PeekBack.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::PeekBackArrayQueue&lt;Capacity, T&gt;" Collapsed="true">
+    <Position X="0.75" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAgAAAAgAA=</HashCode>
+      <FileName>PeekBackArrayQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::PeekBackListQueue&lt;T&gt;" Collapsed="true">
+    <Position X="4" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAgEA=</HashCode>
+      <FileName>PeekBackListQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab10::PeekBackUnboundedQueue&lt;T&gt;" Collapsed="true">
+    <Position X="6.5" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAQAAAAAAAgAAAAgAA=</HashCode>
+      <FileName>PeekBackUnboundedQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

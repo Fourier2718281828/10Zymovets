@@ -25,7 +25,7 @@ namespace lab10
 		using cond_ref = conditional_t<IsConstant, const T&, T&>;
 		class BadIterator;
 	public:
-		AbstractIterator() = default;
+		AbstractIterator()			= default;
 		virtual ~AbstractIterator() = default;
 		inline AbstractIterator& clone();
 		inline void start();
