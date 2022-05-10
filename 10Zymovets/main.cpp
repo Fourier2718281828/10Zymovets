@@ -22,20 +22,19 @@ using namespace lab10;
 //	Version 1.0
 //***********************************************************
 
-
-//Const iterators?
-//Make iterator exceptions
-// << based on iterator?
-
 template<typename T>
 void test(IPeekBackQueue<T>& pbb)
 {
 
 	cout << "--------------------------" << endl;
 	pbb.put(1);
+	cout << pbb << endl;
 	pbb.put(2);
+	cout << pbb << endl;
 	pbb.put(3);
+	cout << pbb << endl;
 	pbb.put(4);
+	cout << pbb << endl;
 
 	for (int i = 0; i < pbb.size(); ++i)
 		cout << pbb.peekback(i) << endl;
@@ -47,10 +46,15 @@ void test(IPeekBackQueue<T>& pbb)
 	try
 	{
 		pbb.pop();
+		cout << pbb << endl;
 		pbb.pop();
+		cout << pbb << endl;
 		pbb.pop();
+		cout << pbb << endl;
 		pbb.pop();
+		cout << pbb << endl;
 		pbb.pop();
+		cout << pbb << endl;
 	}
 	catch (const IQueue<T>::BadQueue& er)
 	{
@@ -58,11 +62,17 @@ void test(IPeekBackQueue<T>& pbb)
 	}
 
 	pbb.put(1);
+	cout << pbb << endl;
 	pbb.put(2);
+	cout << pbb << endl;
 	pbb.put(3);
+	cout << pbb << endl;
 	pbb.put(4);
+	cout << pbb << endl;
 	pbb.pop();
+	cout << pbb << endl;
 	pbb.put(5);
+	cout << pbb << endl;
 
 
 	for (int i = 0; i < pbb.size(); ++i)

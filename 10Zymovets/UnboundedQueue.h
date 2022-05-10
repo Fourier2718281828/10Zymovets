@@ -73,13 +73,31 @@ namespace lab10
 	template<typename T>
 	inline typename UnboundedQueue<T>::ConstIterator& UnboundedQueue<T>::attach() const
 	{
-		return *(new ConstIterator(&_allocator[0], &_allocator[_front], &_allocator[_back], IQueue<T>::capacity()));
+		return *(
+				new ConstIterator
+				(
+					&_allocator[0],
+					&_allocator[_front],
+					&_allocator[_back],
+					IQueue<T>::size(),
+					IQueue<T>::capacity()
+				)
+				);
 	}
 
 	template<typename T>
 	inline typename UnboundedQueue<T>::Iterator& UnboundedQueue<T>::attach()
 	{
-		return *(new Iterator(&_allocator[0], &_allocator[_front], &_allocator[_back], IQueue<T>::capacity()));
+		return *(
+				new Iterator
+				(
+					&_allocator[0],
+					&_allocator[_front],
+					&_allocator[_back],
+					IQueue<T>::size(),
+					IQueue<T>::capacity()
+				)
+				);
 	}
 
 	template<typename T>

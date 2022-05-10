@@ -2,6 +2,7 @@
 #define _ARRAY_QUEUE_ITERATOR_
 #include "ArrayQueue.h"
 #include "AbstractIterator.h"
+#include <iostream>
 
 //***********************************************************
 //	Визначити клас абстрактних черг за наведеним нижче 
@@ -30,9 +31,10 @@ namespace lab10
 		cond_const_ptr		_start;
 		cond_const_ptr		_end;
 		mutable cond_ptr	_current;
+		const size_t		_size;
 		const size_t		_capacity;
 	public:
-		ArrayQueueIterator(cond_const_ptr, cond_const_ptr, cond_const_ptr, const size_t capacity);
+		ArrayQueueIterator(cond_const_ptr, cond_const_ptr, cond_const_ptr, const size_t, const size_t);
 		ArrayQueueIterator(const ArrayQueueIterator&);
 		virtual ~ArrayQueueIterator() = default;
 	private:
@@ -44,7 +46,7 @@ namespace lab10
 		virtual inline const T& do_operator_star()								const	override;
 		virtual inline cond_ref do_operator_star()										override;
 	private:
-		inline cond_const_ptr step_forward(cond_const_ptr, const size_t) const;
+		inline cond_const_ptr	step_forward(cond_const_ptr, const size_t)		const;
 	};
 
 	template<bool IsConstant, typename T>
@@ -53,24 +55,27 @@ namespace lab10
 		ArrayQueueIterator<IsConstant, T>::cond_const_ptr array_beginning,
 		ArrayQueueIterator<IsConstant, T>::cond_const_ptr start,
 		ArrayQueueIterator<IsConstant, T>::cond_const_ptr end,
+		const size_t size,
 		const size_t capacity
 	)
-		: _array_begining(array_beginning),
-		_start(start),
-		_end(end),
-		_current(start),
-		_capacity(capacity)
+		:	_array_begining(array_beginning),
+			_start(start),
+			_end(end),
+			_current(size ? start : nullptr),
+			_size(size),
+			_capacity(capacity)
 	{
 		return;
 	}
 
 	template<bool IsConstant, typename T>
 	inline ArrayQueueIterator<IsConstant, T>::ArrayQueueIterator(const ArrayQueueIterator& itor)
-		: _array_begining(itor._array_begining),
-		_start(itor._start),
-		_end(itor._end),
-		_current(itor._current),
-		_capacity(itor._capacity)
+		:	_array_begining(itor._array_begining),
+			_start(itor._start),
+			_end(itor._end),
+			_current(itor._current),
+			_size(itor._size),
+			_capacity(itor._capacity)
 	{
 		return;
 	}
@@ -105,12 +110,12 @@ namespace lab10
 	inline const typename ArrayQueueIterator<IsConstant, T>&
 		ArrayQueueIterator<IsConstant, T>::do_assign_plus(const size_t i) const
 	{
-		_current = step_forward(_current, i);
-
-		if (nullptr == _current)
+		if (do_stop())
 		{
 			throw BadIterator(ItorProblem::ITERATOR_HAS_STOPPED);
 		}
+
+		_current = step_forward(_current, i);
 
 		return *this;
 	}
@@ -136,19 +141,26 @@ namespace lab10
 			const size_t steps
 		)	const
 	{
-		size_t curr_index = (curr >= _start)
-			? curr - _start
-			: _capacity - (_end - curr);
-
-		if (curr_index > _capacity)
+		if (_end == _current)
 		{
-			throw BadIterator(ItorProblem::POINTER_OUT_OF_BOUNDS);
+			return nullptr;
 		}
 
-		return	curr_index == _capacity
-			? nullptr
-			: _array_begining + (curr_index + steps) % _capacity;
+		size_t sum = _current - _array_begining + steps;
+		size_t next_index = _capacity == 0 ? 0 : sum % _capacity;
+		auto next_position = _array_begining + next_index;
 
+		if 
+			(
+				(_start <= _end && next_position >= _start && next_position <= _end)	
+				||
+				(_start >  _end && (next_position >= _start || next_position <= _end))
+			)
+		{
+			return next_position;
+		}
+		
+		return nullptr;
 	}
 }
-#endif // !_ARRAY_QUEUE_ITERATOR_
+#endif // !_ARRAY_QUEUE_ITERATOR_ 

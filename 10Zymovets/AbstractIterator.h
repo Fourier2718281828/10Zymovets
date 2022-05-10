@@ -47,7 +47,6 @@ namespace lab10
 		{
 			CONTAINER_MODIFIED,
 			ITERATOR_HAS_STOPPED,
-			POINTER_OUT_OF_BOUNDS,
 		};
 	};
 
@@ -128,10 +127,8 @@ namespace lab10
 			return "Contaiter's modification during iteration.";
 		case ItorProblem::ITERATOR_HAS_STOPPED:
 			return "Iteration via expired iterator.";
-		case ItorProblem::POINTER_OUT_OF_BOUNDS:
-			return "Pointer value exceeds the allowed limits of the queue";
 		default:
-			return "The problem wasn not stated";
+			return "The problem was not stated";
 		}
 	}
 }

@@ -109,10 +109,29 @@ namespace lab10
 		return do_print(o);
 	}
 
-	template<typename T>
+	/*template<typename T>
 	ostream& operator<<(ostream& o, const IQueue<T>& q)
 	{
 		return q.print(o);
+	}*/
+
+	template<typename T>
+	ostream& operator<<(ostream& o, const IQueue<T>& q)
+	{
+		o << '[';
+		auto& itor = q.attach();
+		while (!itor.stop())
+		{
+			o << *itor;
+			++itor;
+			if (!itor.stop())
+				o << ", ";
+		}
+		delete& itor;
+		o << ']' << ':' << q.size();
+		if (q.capacity() <= 100000)
+			o << '/' << q.capacity();
+		return o;
 	}
 
 	template<typename T>

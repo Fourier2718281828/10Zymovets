@@ -67,13 +67,30 @@ namespace lab10
 	template<size_t Capacity, typename T>
 	inline typename ArrayQueue<Capacity, T>::ConstIterator& ArrayQueue<Capacity, T>::attach() const
 	{
-		return *(new ConstIterator(&_allocator[0], &_allocator[_front], &_allocator[_back], IQueue<T>::capacity()));
+		return *(
+				new ConstIterator
+				(
+					&_allocator[0], 
+					&_allocator[_front], 
+					&_allocator[_back], 
+					IQueue<T>::size(), 
+					IQueue<T>::capacity()
+				)
+				);
 	}
 
 	template<size_t Capacity, typename T>
 	inline typename ArrayQueue<Capacity, T>::Iterator& ArrayQueue<Capacity, T>::attach()
 	{
-		return *(new Iterator(&_allocator[0], &_allocator[_front], &_allocator[_back], IQueue<T>::capacity()));
+		return *(
+				new Iterator
+				(
+					&_allocator[0], 
+					&_allocator[_front], 
+					&_allocator[_back], 
+					IQueue<T>::size(), 
+					IQueue<T>::capacity())
+				);
 	}
 
 	template<size_t Capacity, typename T>
