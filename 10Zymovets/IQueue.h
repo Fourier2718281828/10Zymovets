@@ -158,6 +158,8 @@ namespace lab10
 			return "Cannot pop from an empty queue.";
 		case QueueProblem::FULL_QUEUE_PUT:
 			return "Cannot put to a full queue.";
+		case QueueProblem::PEEKBACK_INDEX_OUT_OF_BOUNDS:
+			return "The non-existent element cannot be peeked.";
 		default:
 			return "The problem wasn not stated";
 		}
